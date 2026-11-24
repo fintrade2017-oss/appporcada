@@ -1,0 +1,2493 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>El Mar a Lago del Siglo XXI - La Porcada | Plataforma Privada</title>
+  <style>
+    :root {
+      --bg-ivory: #f6f3ec;
+      --bg-card: #fffdf9;
+      --bg-soft: #eee9de;
+      --ink-forest: #122620;
+      --ink-slate: #3b4d47;
+      --ink-muted: #687771;
+      --accent-gold: #9a7b4f;
+      --accent-gold-soft: #cbb48b;
+      --accent-emerald: #1c4438;
+      --border-hairline: rgba(18, 38, 32, 0.14);
+      --shadow-soft: 0 12px 32px rgba(18, 38, 32, 0.06);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      background-color: var(--bg-ivory);
+      color: var(--ink-forest);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button, input, select, textarea {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* Gatekeeper */
+    #gatekeeper-screen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 20px;
+      background:
+        radial-gradient(circle at top right, rgba(154, 123, 79, 0.14), transparent 45%),
+        radial-gradient(circle at bottom left, rgba(28, 68, 56, 0.12), transparent 50%),
+        var(--bg-ivory);
+    }
+
+    .gate-box {
+      width: 100%;
+      max-width: 680px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-lg);
+      padding: 40px 36px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .gate-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-lockup img {
+      height: 46px;
+      width: auto;
+      object-fit: contain;
+      border-radius: 6px;
+    }
+
+    .brand-kicker {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      font-weight: 700;
+    }
+
+    .brand-motto {
+      font-size: 15px;
+      color: var(--ink-slate);
+      font-style: italic;
+    }
+
+    .lang-switch {
+      display: inline-flex;
+      border: 1px solid var(--border-hairline);
+      border-radius: 999px;
+      background: var(--bg-soft);
+      padding: 3px;
+      gap: 2px;
+    }
+
+    .lang-btn {
+      border: none;
+      background: transparent;
+      color: var(--ink-slate);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .lang-btn.active {
+      background: var(--ink-forest);
+      color: #ffffff;
+    }
+
+    .gate-title {
+      font-size: 32px;
+      line-height: 1.2;
+      font-weight: 500;
+      margin-bottom: 12px;
+      color: var(--ink-forest);
+    }
+
+    .gate-desc {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 15px;
+      color: var(--ink-slate);
+      margin-bottom: 24px;
+    }
+
+    .profile-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .profile-pill {
+      border: 1px solid var(--border-hairline);
+      background: var(--bg-ivory);
+      color: var(--ink-slate);
+      padding: 12px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+
+    .profile-pill.active {
+      border-color: var(--accent-emerald);
+      background: var(--accent-emerald);
+      color: #ffffff;
+    }
+
+    .gate-form-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    .gate-input {
+      flex: 1;
+      min-width: 210px;
+      padding: 13px 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(18, 38, 32, 0.24);
+      background: #ffffff;
+      color: var(--ink-forest);
+      font-size: 14px;
+    }
+
+    .btn-primary {
+      background: var(--ink-forest);
+      color: #ffffff;
+      border: 1px solid var(--ink-forest);
+      padding: 13px 22px;
+      border-radius: var(--radius-sm);
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-emerald);
+      border-color: var(--accent-emerald);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--ink-forest);
+      border: 1px solid rgba(18, 38, 32, 0.25);
+      padding: 12px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-soft);
+    }
+
+    .btn-gold {
+      background: var(--accent-gold);
+      color: #ffffff;
+      border: 1px solid var(--accent-gold);
+      padding: 13px 22px;
+      border-radius: var(--radius-sm);
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-gold:hover {
+      opacity: 0.92;
+    }
+
+    .gate-actions-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-hairline);
+      flex-wrap: wrap;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 12.5px;
+      color: var(--ink-muted);
+    }
+
+    .link-btn {
+      background: none;
+      border: none;
+      color: var(--accent-gold);
+      font-weight: 600;
+      text-decoration: underline;
+      cursor: pointer;
+      font-size: 12.5px;
+    }
+
+    .gate-feedback {
+      margin-top: 10px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 13px;
+      color: #8a2c2c;
+      min-height: 18px;
+    }
+
+    /* App Header & Nav */
+    header.site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(246, 243, 236, 0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-hairline);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+      flex-wrap: wrap;
+    }
+
+    .nav-tabs {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .nav-tab {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--ink-slate);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .nav-tab:hover {
+      background: var(--bg-soft);
+      color: var(--ink-forest);
+    }
+
+    .nav-tab.active {
+      background: var(--ink-forest);
+      color: #ffffff;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .badge-profile {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: var(--bg-soft);
+      border: 1px solid var(--border-hairline);
+      color: var(--ink-forest);
+    }
+
+    /* Sections */
+    .view-section {
+      padding: 44px 0 64px;
+    }
+
+    .hero-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 36px;
+    }
+
+    .hero-eyebrow {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .hero-title {
+      font-size: 38px;
+      line-height: 1.18;
+      font-weight: 500;
+      margin-bottom: 14px;
+      max-width: 920px;
+    }
+
+    .hero-subtitle {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 16px;
+      color: var(--ink-slate);
+      max-width: 820px;
+      margin-bottom: 24px;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .hero-media-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .media-tile {
+      background: var(--bg-ivory);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .media-tile img {
+      width: 100%;
+      height: 185px;
+      object-fit: cover;
+      display: block;
+      background: var(--bg-soft);
+    }
+
+    .media-caption {
+      padding: 12px 14px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 12.5px;
+      color: var(--ink-slate);
+    }
+
+    .media-caption strong {
+      display: block;
+      color: var(--ink-forest);
+      margin-bottom: 2px;
+      font-size: 13px;
+    }
+
+    .section-heading {
+      margin-bottom: 20px;
+    }
+
+    .section-heading h2 {
+      font-size: 28px;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .section-heading p {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 14.5px;
+      color: var(--ink-slate);
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-bottom: 36px;
+    }
+
+    .pillar-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .pillar-num {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .pillar-card h3 {
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .pillar-card ul {
+      padding-left: 18px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 13.5px;
+      color: var(--ink-slate);
+    }
+
+    .pillar-card li {
+      margin-bottom: 6px;
+    }
+
+    /* Masterplan SVG */
+    .masterplan-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 36px;
+    }
+
+    .masterplan-layout {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 24px;
+      align-items: center;
+      margin-top: 16px;
+    }
+
+    .zone-btn {
+      cursor: pointer;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .zone-btn:hover {
+      opacity: 0.88;
+    }
+
+    .zone-detail-panel {
+      background: var(--bg-ivory);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-md);
+      padding: 22px;
+    }
+
+    .zone-tag {
+      display: inline-block;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-emerald);
+      background: rgba(28, 68, 56, 0.1);
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+
+    .zone-detail-panel h4 {
+      font-size: 21px;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .zone-detail-panel p {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 14px;
+      color: var(--ink-slate);
+      margin-bottom: 14px;
+    }
+
+    .zone-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .zone-chip {
+      border: 1px solid var(--border-hairline);
+      background: var(--bg-card);
+      color: var(--ink-forest);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .zone-chip.active {
+      background: var(--ink-forest);
+      color: #ffffff;
+    }
+
+    /* Comparison Table */
+    .table-wrap {
+      overflow-x: auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 32px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 13.5px;
+    }
+
+    th, td {
+      padding: 14px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-hairline);
+      vertical-align: top;
+    }
+
+    th {
+      background: var(--bg-soft);
+      color: var(--ink-forest);
+      font-weight: 700;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Membership Detail Cards */
+    .memberships-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .membership-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .membership-card img.card-banner {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+      border-radius: var(--radius-md);
+      margin-bottom: 18px;
+      background: var(--bg-soft);
+    }
+
+    .membership-tier-label {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      margin-bottom: 6px;
+    }
+
+    .membership-card h3 {
+      font-size: 25px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .membership-price {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--accent-emerald);
+      margin-bottom: 14px;
+    }
+
+    .membership-list {
+      padding-left: 18px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 13.5px;
+      color: var(--ink-slate);
+      margin-bottom: 20px;
+    }
+
+    .membership-list li {
+      margin-bottom: 8px;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* Simulator */
+    .sim-switch-bar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+    }
+
+    .sim-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 1.25fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .sim-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .control-group {
+      margin-bottom: 18px;
+    }
+
+    .control-label {
+      display: flex;
+      justify-content: space-between;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink-forest);
+      margin-bottom: 6px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--accent-emerald);
+      cursor: pointer;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .kpi-box {
+      background: var(--bg-ivory);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-md);
+      padding: 14px;
+    }
+
+    .kpi-title {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 11.5px;
+      color: var(--ink-muted);
+      margin-bottom: 4px;
+    }
+
+    .kpi-value {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--ink-forest);
+    }
+
+    .sim-note {
+      margin-top: 14px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 12px;
+      color: var(--ink-muted);
+      line-height: 1.5;
+    }
+
+    /* Legal & Private Desk */
+    .legal-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .legal-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .legal-card h3 {
+      font-size: 19px;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .legal-card p, .legal-card li {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 13.5px;
+      color: var(--ink-slate);
+    }
+
+    .legal-card ul {
+      padding-left: 18px;
+    }
+
+    .legal-card li {
+      margin-bottom: 7px;
+    }
+
+    .desk-form-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-soft);
+      max-width: 780px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field-group label {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--ink-forest);
+    }
+
+    .field-group input, .field-group select, .field-group textarea {
+      padding: 11px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(18, 38, 32, 0.22);
+      background: #ffffff;
+      color: var(--ink-forest);
+      font-size: 13.5px;
+    }
+
+    .receipt-box {
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: var(--radius-md);
+      background: var(--bg-ivory);
+      border: 1px solid var(--accent-gold);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 13.5px;
+    }
+
+    /* Footer */
+    footer.site-footer {
+      background: var(--bg-soft);
+      border-top: 1px solid var(--border-hairline);
+      padding: 28px 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 12px;
+      color: var(--ink-muted);
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    .footer-copy {
+      font-weight: 700;
+      color: var(--ink-forest);
+    }
+
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(18, 38, 32, 0.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 100;
+    }
+
+    .modal-card {
+      width: 100%;
+      max-width: 520px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    @media (max-width: 900px) {
+      .hero-media-strip,
+      .pillars-grid,
+      .masterplan-layout,
+      .memberships-grid,
+      .sim-grid,
+      .legal-grid,
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+      .profile-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-title {
+        font-size: 29px;
+      }
+      .gate-box {
+        padding: 26px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- GATEKEEPER SCREEN -->
+  <section id="gatekeeper-screen">
+    <div class="gate-box">
+      <div class="gate-top-bar">
+        <div class="brand-lockup">
+          <img
+            src="images/ecoresort.png"
+            alt="Logo Ecoresort La Porcada"
+            onerror="this.style.display='none'"
+          />
+          <div>
+            <div class="brand-kicker" id="gate-kicker">ACCESO PRIVADO · GOLFO DE CHIRIQUÍ, PANAMÁ</div>
+            <div class="brand-motto" id="gate-motto">El Mar a Lago del Siglo XXI - La Porcada</div>
+          </div>
+        </div>
+
+        <div class="lang-switch" aria-label="Language Selector">
+          <button type="button" class="lang-btn active" data-lang="es">ES</button>
+          <button type="button" class="lang-btn" data-lang="en">EN</button>
+          <button type="button" class="lang-btn" data-lang="ru">RU</button>
+        </div>
+      </div>
+
+      <h1 class="gate-title" id="gate-title">Plataforma Privada de Membresías y Desarrollo Patrimonial</h1>
+      <p class="gate-desc" id="gate-desc">
+        Entorno reservado para invitados acreditados, compradores de villas en fideicomiso, miembros Executive, family offices e inversores institucionales.
+      </p>
+
+      <div class="profile-grid" id="profile-selector">
+        <button type="button" class="profile-pill active" data-profile-idx="1" id="prof-1">Miembro / Comprador</button>
+        <button type="button" class="profile-pill" data-profile-idx="2" id="prof-2">Family Office / Inversor</button>
+        <button type="button" class="profile-pill" data-profile-idx="3" id="prof-3">Asesor / Intermediario</button>
+      </div>
+
+      <form id="gate-form" class="gate-form-row">
+        <input
+          type="text"
+          id="invite-code-input"
+          class="gate-input"
+          placeholder="Código de invitación (ej. PORCADA2026)"
+          autocomplete="off"
+        />
+        <button type="submit" class="btn-primary" id="btn-enter-code">Entrar al Portal</button>
+      </form>
+
+      <div class="gate-actions-footer">
+        <button type="button" class="btn-gold" id="btn-vip-demo">Acceso Invitado VIP (Demo Directa)</button>
+        <button type="button" class="link-btn" id="btn-open-cred-modal">Solicitar credencial de acceso</button>
+      </div>
+      <div class="gate-feedback" id="gate-feedback"></div>
+    </div>
+  </section>
+
+  <!-- MAIN APPLICATION -->
+  <div id="main-app" class="hidden">
+    <header class="site-header">
+      <div class="container header-inner">
+        <div class="brand-lockup">
+          <img
+            src="images/logo.png"
+            alt="Promotor Takyma"
+            onerror="this.style.display='none'"
+          />
+          <div>
+            <div class="brand-kicker" id="hdr-motto">El Mar a Lago del Siglo XXI - La Porcada</div>
+            <div class="brand-motto" id="hdr-sub">Takyma Investment Pioneer · Panamá</div>
+          </div>
+        </div>
+
+        <nav class="nav-tabs" aria-label="Secciones principales">
+          <button type="button" class="nav-tab active" data-tab="vision" id="tab-vision">Visión &amp; Destino</button>
+          <button type="button" class="nav-tab" data-tab="memberships" id="tab-memberships">Membresías</button>
+          <button type="button" class="nav-tab" data-tab="simulator" id="tab-simulator">Simulador</button>
+          <button type="button" class="nav-tab" data-tab="legal" id="tab-legal">Marco Jurídico · Panamá</button>
+          <button type="button" class="nav-tab" data-tab="desk" id="tab-desk">Private Desk</button>
+        </nav>
+
+        <div class="header-right">
+          <span class="badge-profile" id="active-profile-badge">Perfil: Miembro / Comprador</span>
+          <div class="lang-switch">
+            <button type="button" class="lang-btn active" data-lang="es">ES</button>
+            <button type="button" class="lang-btn" data-lang="en">EN</button>
+            <button type="button" class="lang-btn" data-lang="ru">RU</button>
+          </div>
+          <button type="button" class="btn-secondary" id="btn-lock-portal">Bloquear</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <!-- TAB 1: VISION & DESTINO -->
+      <section id="view-vision" class="view-section">
+        <div class="hero-card">
+          <div class="hero-eyebrow" id="hero-eyebrow">EL MAR A LAGO DEL SIGLO XXI - LA PORCADA · 347 HECTÁREAS · CHIRIQUÍ, PANAMÁ</div>
+          <h1 class="hero-title" id="hero-title">Soberanía privada, arquitectura Denniston y autosuficiencia integral en el Pacífico panameño.</h1>
+          <p class="hero-subtitle" id="hero-subtitle">
+            Diseñado como un enclave de acceso estrictamente controlado que reúne 50 villas Legacy en fideicomiso y hasta 5,000 membresías Executive, respaldado por aduana privada, pista para jets privados bajo modelo chárter, dos marinas, autosuficiencia energética e hídrica, producción propia y licencia de casino.
+          </p>
+
+          <div class="hero-cta-row">
+            <button type="button" class="btn-primary" id="cta-to-memberships">Explorar Membresías Legacy &amp; Executive</button>
+            <button type="button" class="btn-secondary" id="cta-to-simulator">Abrir Simulador de Valor y Recompra</button>
+          </div>
+
+          <div class="hero-media-strip">
+            <div class="media-tile">
+              <img src="images/membeach.png" alt="Estilo de vida frente al mar en La Porcada" onerror="this.style.display='none'" />
+              <div class="media-caption">
+                <strong id="cap-beach-t">Hospitalidad Privada en la Costa</strong>
+                <span id="cap-beach-d">Entorno de baja densidad y privacidad absoluta para socios y familias.</span>
+              </div>
+            </div>
+            <div class="media-tile">
+              <img src="images/bienestar.png" alt="Programa de longevidad y bienestar" onerror="this.style.display='none'" />
+              <div class="media-caption">
+                <strong id="cap-well-t">Programa de Longevidad</strong>
+                <span id="cap-well-d">Protocolos preventivos incluidos y tratamientos especiales con extensión de estancia.</span>
+              </div>
+            </div>
+            <div class="media-tile">
+              <img src="images/familyoffices.png" alt="Red global de family offices" onerror="this.style.display='none'" />
+              <div class="media-caption">
+                <strong id="cap-fo-t">Alcance Global de Family Offices</strong>
+                <span id="cap-fo-d">Convocatoria internacional con gobernanza y control de acceso en Panamá.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-heading">
+          <h2 id="pillars-heading">Cuatro Pilares de El Mar a Lago del Siglo XXI - La Porcada</h2>
+          <p id="pillars-sub">Infraestructura autónoma, firma de referencia mundial y exclusividad operativa en el Golfo de Chiriquí.</p>
+        </div>
+
+        <div class="pillars-grid">
+          <article class="pillar-card">
+            <div class="pillar-num" id="p1-num">01 · LOGÍSTICA &amp; SOBERANÍA</div>
+            <h3 id="p1-title">Aduana Privada, Pista Chárter y Dos Marinas</h3>
+            <ul id="p1-list">
+              <li><strong>Aduana privada en la isla:</strong> llegada discreta sin exposición en terminales comerciales.</li>
+              <li><strong>Pista de aterrizaje para jet privado:</strong> operativa bajo modelo de vuelo chárter.</li>
+              <li><strong>Dos marinas:</strong> infraestructura náutica para yates, embarcaciones deportivas y traslados.</li>
+            </ul>
+          </article>
+
+          <article class="pillar-card">
+            <div class="pillar-num" id="p2-num">02 · AUTOSUFICIENCIA &amp; KILÓMETRO CERO</div>
+            <h3 id="p2-title">Energía, Manantial, Ganadería Brahman, Huerta y Pesca</h3>
+            <ul id="p2-list">
+              <li><strong>Autosuficiencia energética:</strong> generación propia y respaldo operativo independiente.</li>
+              <li><strong>Manantial de agua propio:</strong> fuente natural en la isla junto a producción agrícola y pesquera.</li>
+              <li><strong>Vacada de 300 cabezas de ganado Brahman:</strong> abastecimiento propio con recogida diaria de hortalizas y pesca diaria.</li>
+            </ul>
+          </article>
+
+          <article class="pillar-card">
+            <div class="pillar-num" id="p3-num">03 · ARQUITECTURA &amp; OPERACIÓN HOTELERA</div>
+            <h3 id="p3-title">Denniston y Negociaciones con Aman Resorts o COMO Group</h3>
+            <ul id="p3-list">
+              <li><strong>Villas firmadas por Denniston:</strong> revalorización estimada en torno al +30 % sobre los 25 MM USD en planos al entregarse finalizadas.</li>
+              <li><strong>Operación hotelera de primer nivel:</strong> en negociaciones con <strong>Aman Resorts</strong> o <strong>COMO Group</strong> para la explotación de la isla.</li>
+            </ul>
+          </article>
+
+          <article class="pillar-card">
+            <div class="pillar-num" id="p4-num">04 · CLUB PRIVADO &amp; LICENCIA DE CASINO</div>
+            <h3 id="p4-title">Ocio, Deportes, Longevidad y Licencia de Casino</h3>
+            <ul id="p4-list">
+              <li><strong>Licencia de casino:</strong> espacio privado de entretenimiento dentro de un entorno con acceso controlado.</li>
+              <li><strong>Bienestar y longevidad:</strong> tratamientos cortos gratuitos dentro de los 10 días y especiales con ampliación de estancia según clínica.</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="masterplan-box">
+          <div class="section-heading">
+            <h2 id="mp-heading">Masterplan Interactivo de la Isla</h2>
+            <p id="mp-sub">Seleccione una zona del mapa o un marcador para inspeccionar su función dentro del proyecto.</p>
+          </div>
+
+          <div class="masterplan-layout">
+            <div>
+              <svg viewBox="0 0 640 360" width="100%" role="img" aria-label="Mapa interactivo de La Porcada">
+                <rect x="0" y="0" width="640" height="360" rx="14" fill="#dcebe6" />
+                <path d="M90,195 C105,105 215,62 355,74 C485,85 565,140 550,225 C535,302 420,322 285,308 C165,295 75,268 90,195 Z" fill="#efe9da" stroke="#1c4438" stroke-width="2.5" />
+                <path d="M135,195 C150,132 230,104 345,112 C450,120 510,160 498,218 C486,272 395,286 285,274 C185,263 122,242 135,195 Z" fill="#cbe0c5" opacity="0.65" />
+
+                <!-- Zone 1: Legacy Villas -->
+                <g class="zone-btn" data-zone="legacy">
+                  <circle cx="215" cy="145" r="22" fill="#122620" />
+                  <text x="215" y="150" text-anchor="middle" fill="#ffffff" font-size="12" font-weight="bold">V50</text>
+                  <text x="215" y="182" text-anchor="middle" fill="#122620" font-size="11" font-weight="bold" id="svg-lbl-legacy">Legacy Villas</text>
+                </g>
+
+                <!-- Zone 2: Airstrip & Customs -->
+                <g class="zone-btn" data-zone="air">
+                  <rect x="310" y="92" width="120" height="16" rx="4" fill="#1c4438" transform="rotate(-8 370 100)" />
+                  <circle cx="370" cy="100" r="16" fill="#9a7b4f" />
+                  <text x="370" y="104" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="bold">AIR</text>
+                  <text x="370" y="128" text-anchor="middle" fill="#122620" font-size="11" font-weight="bold" id="svg-lbl-air">Pista &amp; Aduana</text>
+                </g>
+
+                <!-- Zone 3: Twin Marinas -->
+                <g class="zone-btn" data-zone="marinas">
+                  <circle cx="515" cy="195" r="18" fill="#1c4438" />
+                  <circle cx="465" cy="285" r="18" fill="#1c4438" />
+                  <text x="515" y="199" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="bold">M1</text>
+                  <text x="465" y="289" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="bold">M2</text>
+                  <text x="515" y="226" text-anchor="middle" fill="#122620" font-size="11" font-weight="bold" id="svg-lbl-marinas">2 Marinas</text>
+                </g>
+
+                <!-- Zone 4: Longevity & Casino -->
+                <g class="zone-btn" data-zone="wellness">
+                  <circle cx="325" cy="195" r="20" fill="#9a7b4f" />
+                  <text x="325" y="199" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="bold">LUX</text>
+                  <text x="325" y="228" text-anchor="middle" fill="#122620" font-size="11" font-weight="bold" id="svg-lbl-wellness">Longevidad &amp; Casino</text>
+                </g>
+
+                <!-- Zone 5: Self-Sufficiency -->
+                <g class="zone-btn" data-zone="agro">
+                  <circle cx="210" cy="245" r="19" fill="#2f5e4e" />
+                  <text x="210" y="249" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="bold">300</text>
+                  <text x="210" y="276" text-anchor="middle" fill="#122620" font-size="11" font-weight="bold" id="svg-lbl-agro">Brahman &amp; Manantial</text>
+                </g>
+              </svg>
+            </div>
+
+            <div class="zone-detail-panel">
+              <div class="zone-tag" id="zone-badge">LEGACY · 50 VILLAS EN FIDEICOMISO</div>
+              <h4 id="zone-title">50 Villas Legacy Frente al Mar (Denniston)</h4>
+              <p id="zone-desc">
+                Villas en la orilla de la playa con precio de 25 MM USD en planos, incremento estimado en torno al +30 % al entregar Denniston las unidades finalizadas, 45 días de uso al año, 150,000 USD de mantenimiento anual y 4,5 % anual asegurado en fideicomiso en Panamá.
+              </p>
+              <div class="zone-pills" id="zone-pills">
+                <button type="button" class="zone-chip active" data-zone="legacy" id="chip-legacy">Legacy (50 Villas)</button>
+                <button type="button" class="zone-chip" data-zone="air" id="chip-air">Pista y Aduana</button>
+                <button type="button" class="zone-chip" data-zone="marinas" id="chip-marinas">2 Marinas</button>
+                <button type="button" class="zone-chip" data-zone="wellness" id="chip-wellness">Longevidad &amp; Casino</button>
+                <button type="button" class="zone-chip" data-zone="agro" id="chip-agro">Brahman &amp; Manantial</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2: MEMBRESÍAS -->
+      <section id="view-memberships" class="view-section hidden">
+        <div class="section-heading">
+          <h2 id="mem-heading">Estructura de Membresías: Legacy (50) y Executive (5,000)</h2>
+          <p id="mem-sub">Dos categorías diferenciadas para anclar el patrimonio en fideicomiso y regular el acceso a la isla con control estricto.</p>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th id="th-attr">Parámetro</th>
+                <th id="th-leg">Membresía LEGACY (50 Cupos)</th>
+                <th id="th-exe">Membresía EXECUTIVE (5,000 Cupos)</th>
+              </tr>
+            </thead>
+            <tbody id="comp-table-body">
+              <tr>
+                <td><strong>Cupo total</strong></td>
+                <td>50 membresías (comprador de villa en fideicomiso)</td>
+                <td>5,000 membresías</td>
+              </tr>
+              <tr>
+                <td><strong>Precio / Cuota de alta</strong></td>
+                <td>25,000,000 USD en planos (+30 % estimado al entregar Denniston)</td>
+                <td>250,000 USD cuota inicial / nominal</td>
+              </tr>
+              <tr>
+                <td><strong>Mantenimiento anual</strong></td>
+                <td>150,000 USD / año</td>
+                <td>50,000 USD / año</td>
+              </tr>
+              <tr>
+                <td><strong>Uso y estancia anual</strong></td>
+                <td>45 días al año</td>
+                <td>10 días consecutivos de pernocta al año</td>
+              </tr>
+              <tr>
+                <td><strong>Retorno / Recompra</strong></td>
+                <td>4,5 % anual asegurado (según fideicomiso)</td>
+                <td>Recompra meses 1–60 suelo 150k USD; desde mes 61 al nominal (250k USD). Sin mercado secundario.</td>
+              </tr>
+              <tr>
+                <td><strong>Servicios / Beneficios</strong></td>
+                <td>Villa en fideicomiso + explotación proyectada por Aman Resorts o COMO Group + acceso total y casino</td>
+                <td>Titular + pareja e hijos (libro de familia o acuerdo); ocio, deportes, longevidad (cortos gratis; especiales amplían estancia según clínica) y casino</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="memberships-grid">
+          <article class="membership-card">
+            <div>
+              <img src="images/memlegacy.png" alt="Membresía Legacy Villa en Fideicomiso" class="card-banner" onerror="this.style.display='none'" />
+              <div class="membership-tier-label" id="leg-tier-lbl">CUPO LIMITADO · 50 UNIDADES</div>
+              <h3 id="leg-card-title">Membresía LEGACY</h3>
+              <div class="membership-price" id="leg-card-price">25,000,000 USD en planos · 150,000 USD/año mantenimiento</div>
+              <ul class="membership-list" id="leg-card-list">
+                <li><strong>Fideicomiso en Panamá:</strong> dirigida al comprador de una villa en la orilla de la playa (50 en total).</li>
+                <li><strong>Revalorización por entrega:</strong> al finalizar y entregar Denniston las villas, se estima un incremento en torno al <strong>+30 %</strong> sobre los 25 MM USD en planos.</li>
+                <li><strong>Operador internacional:</strong> explotación de la isla en negociación con <strong>Aman Resorts</strong> o <strong>COMO Group</strong>.</li>
+                <li><strong>Rentabilidad asegurada:</strong> <strong>4,5 % anual</strong> con derecho de uso de <strong>45 días al año</strong> y mantenimiento de <strong>150,000 USD</strong>.</li>
+              </ul>
+            </div>
+            <div class="card-actions">
+              <button type="button" class="btn-primary" data-jump-sim="legacy" id="btn-sim-leg">Simular Legacy</button>
+              <button type="button" class="btn-secondary" data-jump-tab="legal" id="btn-leg-legal">Ver Fideicomiso Panamá</button>
+            </div>
+          </article>
+
+          <article class="membership-card">
+            <div>
+              <img src="images/memexecutive.png" alt="Membresía Executive Club y Longevidad" class="card-banner" onerror="this.style.display='none'" />
+              <div class="membership-tier-label" id="exe-tier-lbl">CUPO MÁXIMO · 5,000 MEMBRESÍAS</div>
+              <h3 id="exe-card-title">Membresía EXECUTIVE</h3>
+              <div class="membership-price" id="exe-card-price">250,000 USD cuota de alta · 50,000 USD/año mantenimiento</div>
+              <ul class="membership-list" id="exe-card-list">
+                <li><strong>Núcleo familiar:</strong> pensada para el propietario de la membresía con su <strong>pareja e hijos</strong>, según indique el libro de familia o se acuerde en la adquisición.</li>
+                <li><strong>10 días seguidos de pernocta:</strong> con servicios lúdicos, deportivos y tratamientos de longevidad.</li>
+                <li><strong>Clínica de longevidad:</strong> tratamientos cortos/gratuitos incluidos y <strong>tratamientos especiales</strong> que, cuadrando con la clínica, ajustan y amplían la estancia si es necesario.</li>
+                <li><strong>Recompra y control de acceso:</strong> opción de recompra durante los primeros <strong>60 meses con suelo de 150,000 USD</strong> y <strong>desde el mes 61 por el nominal (250,000 USD)</strong>. <strong>Sin mercado secundario</strong> para mantener el control de acceso.</li>
+              </ul>
+            </div>
+            <div class="card-actions">
+              <button type="button" class="btn-primary" data-jump-sim="executive" id="btn-sim-exe">Simular Executive</button>
+              <button type="button" class="btn-gold" data-jump-tab="desk" id="btn-exe-desk">Solicitar Membresía</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- TAB 3: SIMULADOR -->
+      <section id="view-simulator" class="view-section hidden">
+        <div class="section-heading">
+          <h2 id="sim-heading">Simulador Patrimonial y de Recompra</h2>
+          <p id="sim-sub">Evalúe escenarios para Membresía Legacy (villa 25M USD, +30% entrega Denniston, 4,5% anual, 150k USD mantenimiento) o Membresía Executive (250k USD alta, 50k USD mantenimiento, recompra 60m / 61m+).</p>
+        </div>
+
+        <div class="sim-switch-bar">
+          <button type="button" class="btn-primary" id="sim-mode-legacy">Simulador LEGACY (25M USD)</button>
+          <button type="button" class="btn-secondary" id="sim-mode-executive">Simulador EXECUTIVE (250k USD)</button>
+        </div>
+
+        <!-- LEGACY SIMULATOR -->
+        <div id="sim-legacy-panel" class="sim-grid">
+          <div class="sim-panel">
+            <div class="control-group">
+              <div class="control-label">
+                <span id="lbl-leg-years">Horizonte temporal (años)</span>
+                <span id="leg-years-val">5 años</span>
+              </div>
+              <input type="range" id="leg-years" min="1" max="10" value="5" />
+            </div>
+
+            <div class="control-group">
+              <div class="control-label">
+                <span id="lbl-leg-uplift">Incremento estimado tras entrega Denniston (%)</span>
+                <span id="leg-uplift-val">30%</span>
+              </div>
+              <input type="range" id="leg-uplift" min="15" max="50" step="1" value="30" />
+            </div>
+
+            <div class="control-group">
+              <div class="control-label">
+                <span id="lbl-leg-scope">Alcance de cálculo</span>
+                <span id="leg-scope-label">1 Villa Legacy</span>
+              </div>
+              <select id="leg-scope" class="gate-input" style="width:100%;">
+                <option value="1" id="opt-leg-1" selected>1 Villa Legacy (25,000,000 USD base)</option>
+                <option value="50" id="opt-leg-50">Cartera completa 50 Villas Legacy (1,250,000,000 USD base)</option>
+              </select>
+            </div>
+
+            <div style="margin-top: 14px;">
+              <img src="images/bonoporcada.png" alt="Instrumento financiero para membresía" style="width:100%; max-height:170px; object-fit:cover; border-radius:10px; border:1px solid var(--border-hairline);" onerror="this.style.display='none'" />
+            </div>
+
+            <p class="sim-note" id="leg-sim-note">
+              Base en planos: 25,000,000 USD por villa · Retorno anual asegurado: 4,5 % sobre precio en planos · Mantenimiento anual: 150,000 USD/año · Uso: 45 días/año.
+            </p>
+          </div>
+
+          <div class="sim-panel">
+            <div class="kpi-grid">
+              <div class="kpi-box">
+                <div class="kpi-title" id="kpi-t-leg-base">Precio en Planos (Base)</div>
+                <div class="kpi-value" id="kpi-leg-base">$25,000,000</div>
+              </div>
+              <div class="kpi-box">
+                <div class="kpi-title" id="kpi-t-leg-post">Valor Estimado Post-Entrega</div>
+                <div class="kpi-value" id="kpi-leg-post">$32,500,000</div>
+              </div>
+              <div class="kpi-box">
+                <div class="kpi-title" id="kpi-t-leg-yield">Retorno 4,5% Acumulado</div>
+                <div class="kpi-value" id="kpi-leg-yield">$5,625,000</div>
+              </div>
+              <div class="kpi-box">
+                <div class="kpi-title" id="kpi-t-leg-maint">Mantenimiento Acumulado</div>
+                <div class="kpi-value" id="kpi-leg-maint">$750,000</div>
+              </div>
+            </div>
+
+            <svg id="svg-legacy" viewBox="0 0 520 230" width="100%" style="background:#f6f3ec; border-radius:10px; border:1px solid var(--border-hairline);"></svg>
+            <p class="sim-note" id="leg-summary-line"></p>
+          </div>
+        </div>
+
+        <!-- EXECUTIVE SIMULATOR -->
+        <div id="sim-executive-panel" class="sim-grid hidden">
+          <div class="sim-panel">
+            <div class="control-group">
+              <div class="control-label">
+                <span id="lbl-exe-month">Mes de evaluación / posible recompra</span>
+                <span id="exe-month-val">Mes 36 (3.0 años)</span>
+              </div>
+              <input type="range" id="exe-month" min="1" max="120" value="36" />
+            </div>
+
+            <div class="control-group">
+              <div class="control-label">
+                <span id="lbl-exe-count">Número de membresías Executive</span>
+                <span id="exe-count-val">1 membresía</span>
+              </div>
+              <input type="range" id="exe-count" min="1" max="50" value="1" />
+            </div>
+
+            <div style="margin-top: 14px;">
+              <img src="images/bonoporcada.png" alt="Instrumento financiero membresía Executive" style="width:100%; max-height:170px; object-fit:cover; border-radius:10px; border:1px solid var(--border-hairline);" onerror="this.style.display='none'" />
+            </div>
+
+            <p class="sim-note" id="exe-sim-note">
+              Alta / nominal: 250,000 USD · Mantenimiento anual: 50,000 USD/año · Recompra meses 1–60: suelo de 150,000 USD · Desde mes 61: nominal de 250,000 USD · Sin mercado secundario.
+            </p>
+          </div>
+
+          <div class="sim-panel">
+            <div class="kpi-grid">
+              <div class="kpi-box">
+                <div class="kpi-title" id="kpi-t-exe-nom">Cuota Inicial / Nominal</div>
+                <div class="kpi-value" id="kpi-exe-nominal">$250,000</div>
+              </div>
+              <div class="kpi-box">
+                <div class="kpi-title" id="kpi-t-exe-buy">Valor de Recompra Aplicable</div>
+                <div class="kpi-value" id="kpi-exe-buyback">$150,000</div>
+              </div>
+              <div class="kpi-box">
+                <div class="kpi-title" id="kpi-t-exe-maint">Mantenimiento Prorrateado</div>
+                <div class="kpi-value" id="kpi-exe-maint">$150,000</div>
+              </div>
+              <div class="kpi-box">
+                <div class="kpi-title" id="kpi-t-exe-tranche">Tramo de Recompra</div>
+                <div class="kpi-value" id="kpi-exe-tranche">Meses 1–60 (Suelo)</div>
+              </div>
+            </div>
+
+            <svg id="svg-executive" viewBox="0 0 520 230" width="100%" style="background:#f6f3ec; border-radius:10px; border:1px solid var(--border-hairline);"></svg>
+            <p class="sim-note" id="exe-summary-line"></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 4: MARCO JURÍDICO · PANAMÁ -->
+      <section id="view-legal" class="view-section hidden">
+        <div class="section-heading">
+          <h2 id="legal-heading">Marco Jurídico y Estructuración en la República de Panamá</h2>
+          <p id="legal-sub">Articulación fiduciaria, contractual y operativa de El Mar a Lago del Siglo XXI - La Porcada en Chiriquí, Panamá.</p>
+        </div>
+
+        <div class="legal-grid">
+          <article class="legal-card">
+            <h3 id="leg-c1-t">Fideicomiso Legacy (Ley 1 de 1984 · Panamá)</h3>
+            <ul id="leg-c1-list">
+              <li>Las <strong>50 villas Legacy</strong> en la orilla de la playa (25 MM USD en planos) se estructuran bajo fideicomiso en Panamá para delimitar titularidades, hitos de entrega y administración patrimonial.</li>
+              <li>Se regulan contractualmente el derecho de uso de <strong>45 días al año</strong>, la cuota de mantenimiento de <strong>150,000 USD anuales</strong> y el compromiso de <strong>4,5 % anual asegurado</strong>.</li>
+              <li>La estimación de revalorización del <strong>+30 %</strong> al entregar Denniston las villas finalizadas y la explotación por <strong>Aman Resorts</strong> o <strong>COMO Group</strong> se reflejan con claridad diferenciando estimaciones y negociaciones en curso frente a cláusulas contractuales.</li>
+            </ul>
+          </article>
+
+          <article class="legal-card">
+            <h3 id="leg-c2-t">Contrato Executive, Recompra y Prohibición de Mercado Secundario</h3>
+            <ul id="leg-c2-list">
+              <li>Cada una de las hasta <strong>5,000 membresías Executive</strong> (250,000 USD de cuota inicial/nominal; 50,000 USD de mantenimiento anual) se rige por contrato y reglamento interno en Panamá.</li>
+              <li>Acredita la entrada del titular junto a <strong>pareja e hijos</strong> según libro de familia o acuerdo en la adquisición, para estancias de <strong>10 días seguidos</strong> (ampliables por tratamientos especiales coordinados con la clínica).</li>
+              <li><strong>Sin mercado secundario:</strong> se prohíbe la reventa libre entre terceros para preservar el control de acceso a la isla. La opción de recompra garantiza un <strong>suelo de 150,000 USD hasta el mes 60</strong> y el <strong>nominal de 250,000 USD a partir del mes 61</strong>, conforme a los términos y condiciones del contrato.</li>
+            </ul>
+          </article>
+
+          <article class="legal-card">
+            <h3 id="leg-c3-t">Operaciones, Infraestructura y Licencia de Casino en Chiriquí</h3>
+            <ul id="leg-c3-list">
+              <li>La operación de <strong>aduana privada</strong>, <strong>pista para jet privado (modelo vuelo chárter)</strong>, <strong>dos marinas</strong>, <strong>clínica de longevidad</strong> y <strong>licencia de casino</strong> se canaliza conforme a las normativas y autorizaciones aplicables en Panamá.</li>
+              <li>Los recursos propios de la isla —generación energética, manantial de agua, vacada de <strong>300 cabezas de ganado Brahman</strong>, recogida diaria de hortalizas y pesca diaria— se integran en el plan operativo y de gobernanza del activo.</li>
+            </ul>
+          </article>
+
+          <article class="legal-card">
+            <h3 id="leg-c4-t">Aviso Legal Institucional (República de Panamá)</h3>
+            <p id="leg-c4-p">
+              Esta plataforma privada de <strong>El Mar a Lago del Siglo XXI - La Porcada</strong> (Chiriquí, República de Panamá), promovida por <strong>Takyma Investment Pioneer</strong>, tiene carácter estrictamente informativo para invitados, compradores y contrapartes acreditadas. No constituye oferta pública de valores ni asesoría legal, fiscal o financiera vinculante. Los derechos de uso, rentabilidad del 4,5 %, mantenimiento, recompra de membresías Executive (suelo 150k USD hasta mes 60; nominal 250k USD desde mes 61), acuerdos de explotación hotelera (Aman Resorts / COMO Group) y permisos operativos en Panamá quedan sujetos a los contratos definitivos y a la legislación vigente.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- TAB 5: PRIVATE DESK -->
+      <section id="view-desk" class="view-section hidden">
+        <div class="section-heading">
+          <h2 id="desk-heading">Private Desk · Solicitud y Atención Confidencial</h2>
+          <p id="desk-sub">Registro de interés para Membresía Legacy (50 villas), Membresía Executive (5,000 cupos) o consultas sobre el activo en Panamá.</p>
+        </div>
+
+        <div class="desk-form-card">
+          <form id="desk-form">
+            <div class="form-grid">
+              <div class="field-group">
+                <label for="desk-name" id="lbl-desk-name">Nombre completo / Entidad o Family Office</label>
+                <input type="text" id="desk-name" required placeholder="Ej. Inversiones del Pacífico / Nombre" />
+              </div>
+              <div class="field-group">
+                <label for="desk-email" id="lbl-desk-email">Correo electrónico confidencial</label>
+                <input type="email" id="desk-email" required placeholder="nombre@entidad.com" />
+              </div>
+              <div class="field-group">
+                <label for="desk-program" id="lbl-desk-program">Programa o interés</label>
+                <select id="desk-program">
+                  <option value="Membresía LEGACY (Villa 25M USD · Fideicomiso)" id="opt-desk-1">Membresía LEGACY (Villa 25M USD · Fideicomiso)</option>
+                  <option value="Membresía EXECUTIVE (250k USD · 10 días / Longevidad)" id="opt-desk-2">Membresía EXECUTIVE (250k USD · 10 días / Longevidad)</option>
+                  <option value="Estructura del Activo / Operación en Panamá" id="opt-desk-3">Estructura del Activo / Operación en Panamá</option>
+                </select>
+              </div>
+              <div class="field-group">
+                <label for="desk-family" id="lbl-desk-family">Núcleo familiar / Notas de adquisición</label>
+                <input type="text" id="desk-family" placeholder="Ej. Titular, cónyuge e hijos según libro de familia" />
+              </div>
+            </div>
+            <div class="field-group" style="margin-bottom:16px;">
+              <label for="desk-notes" id="lbl-desk-notes">Comentarios adicionales o preferencia de reunión</label>
+              <textarea id="desk-notes" rows="3" placeholder="Indique si desea información sobre plazos de entrega, clínica de longevidad o condiciones de recompra."></textarea>
+            </div>
+            <button type="submit" class="btn-primary" id="btn-desk-submit">Registrar Solicitud Privada</button>
+          </form>
+
+          <div id="desk-receipt" class="receipt-box hidden"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-top">
+          <div class="footer-copy">© 2026 Ecoresort la Porcada by Takyma Investment Pioneer</div>
+          <div id="footer-loc">El Mar a Lago del Siglo XXI - La Porcada · Chiriquí, Panamá</div>
+        </div>
+        <p id="footer-legal">
+          Aviso Legal: Plataforma informativa privada bajo marco de la República de Panamá. Las condiciones de fideicomiso (Ley 1 de 1984), rentabilidad del 4,5 % anual en Legacy, mantenimiento, recompra de membresías Executive (150k USD hasta mes 60; nominal 250k USD desde mes 61) sin mercado secundario, estimaciones de entrega (+30 % Denniston), negociaciones hoteleras (Aman Resorts / COMO Group) y licencias sectoriales (incluida la licencia de casino) se rigen por los contratos definitivos y la normativa aplicable.
+        </p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- MODAL SOLICITUD CREDENCIAL -->
+  <div id="cred-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="cred-modal-title">
+    <div class="modal-card">
+      <h3 id="cred-modal-title" style="font-size:22px; font-weight:500; margin-bottom:10px;">Solicitar Credencial de Acceso</h3>
+      <p id="cred-modal-desc" style="font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size:13.5px; color:var(--ink-slate); margin-bottom:16px;">
+        Deje su correo o indique su perfil para habilitar una clave temporal de acceso a la plataforma privada.
+      </p>
+      <div class="field-group" style="margin-bottom:14px;">
+        <label for="cred-contact" id="lbl-cred-contact">Correo electrónico o entidad</label>
+        <input type="text" id="cred-contact" placeholder="contacto@ejemplo.com" />
+      </div>
+      <div id="cred-result" style="font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size:13px; color:var(--accent-emerald); margin-bottom:14px; font-weight:600;"></div>
+      <div style="display:flex; gap:10px; justify-content:flex-end;">
+        <button type="button" class="btn-secondary" id="btn-close-cred-modal">Cerrar</button>
+        <button type="button" class="btn-primary" id="btn-gen-cred">Generar Clave Invitado</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const I18N = {
+        es: {
+          kicker: "ACCESO PRIVADO · GOLFO DE CHIRIQUÍ, PANAMÁ",
+          motto: "El Mar a Lago del Siglo XXI - La Porcada",
+          sub: "Takyma Investment Pioneer · Panamá",
+          gateTitle: "Plataforma Privada de Membresías y Desarrollo Patrimonial",
+          gateDesc: "Entorno reservado para invitados acreditados, compradores de villas en fideicomiso, miembros Executive, family offices e inversores institucionales.",
+          prof1: "Miembro / Comprador",
+          prof2: "Family Office / Inversor",
+          prof3: "Asesor / Intermediario",
+          profilePrefix: "Perfil: ",
+          lockBtn: "Bloquear",
+          codePlaceholder: "Código de invitación (ej. PORCADA2026)",
+          enterCode: "Entrar al Portal",
+          vipDemo: "Acceso Invitado VIP (Demo Directa)",
+          reqCred: "Solicitar credencial de acceso",
+          invalidCode: "Código no reconocido. Use un código válido o pulse Acceso Invitado VIP (Demo Directa).",
+          tabVision: "Visión & Destino",
+          tabMemberships: "Membresías",
+          tabSimulator: "Simulador",
+          tabLegal: "Marco Jurídico · Panamá",
+          tabDesk: "Private Desk",
+          heroEyebrow: "EL MAR A LAGO DEL SIGLO XXI - LA PORCADA · 347 HECTÁREAS · CHIRIQUÍ, PANAMÁ",
+          heroTitle: "Soberanía privada, arquitectura Denniston y autosuficiencia integral en el Pacífico panameño.",
+          heroSubtitle: "Diseñado como un enclave de acceso estrictamente controlado que reúne 50 villas Legacy en fideicomiso y hasta 5,000 membresías Executive, respaldado por aduana privada, pista para jets privados bajo modelo chárter, dos marinas, autosuficiencia energética e hídrica, producción propia y licencia de casino.",
+          ctaMem: "Explorar Membresías Legacy & Executive",
+          ctaSim: "Abrir Simulador de Valor y Recompra",
+          capBeachT: "Hospitalidad Privada en la Costa",
+          capBeachD: "Entorno de baja densidad y privacidad absoluta para socios y familias.",
+          capWellT: "Programa de Longevidad",
+          capWellD: "Protocolos preventivos incluidos y tratamientos especiales con extensión de estancia.",
+          capFoT: "Alcance Global de Family Offices",
+          capFoD: "Convocatoria internacional con gobernanza y control de acceso en Panamá.",
+          pillarsHeading: "Cuatro Pilares de El Mar a Lago del Siglo XXI - La Porcada",
+          pillarsSub: "Infraestructura autónoma, firma de referencia mundial y exclusividad operativa en el Golfo de Chiriquí.",
+          p1Num: "01 · LOGÍSTICA & SOBERANÍA",
+          p1Title: "Aduana Privada, Pista Chárter y Dos Marinas",
+          p1List: "<li><strong>Aduana privada en la isla:</strong> llegada discreta sin exposición en terminales comerciales.</li><li><strong>Pista de aterrizaje para jet privado:</strong> operativa bajo modelo de vuelo chárter.</li><li><strong>Dos marinas:</strong> infraestructura náutica para yates, embarcaciones deportivas y traslados.</li>",
+          p2Num: "02 · AUTOSUFICIENCIA & KILÓMETRO CERO",
+          p2Title: "Energía, Manantial, Ganadería Brahman, Huerta y Pesca",
+          p2List: "<li><strong>Autosuficiencia energética:</strong> generación propia y respaldo operativo independiente.</li><li><strong>Manantial de agua propio:</strong> fuente natural en la isla junto a producción agrícola y pesquera.</li><li><strong>Vacada de 300 cabezas de ganado Brahman:</strong> abastecimiento propio con recogida diaria de hortalizas y pesca diaria.</li>",
+          p3Num: "03 · ARQUITECTURA & OPERACIÓN HOTELERA",
+          p3Title: "Denniston y Negociaciones con Aman Resorts o COMO Group",
+          p3List: "<li><strong>Villas firmadas por Denniston:</strong> revalorización estimada en torno al +30 % sobre los 25 MM USD en planos al entregarse finalizadas.</li><li><strong>Operación hotelera de primer nivel:</strong> en negociaciones con <strong>Aman Resorts</strong> o <strong>COMO Group</strong> para la explotación de la isla.</li>",
+          p4Num: "04 · CLUB PRIVADO & LICENCIA DE CASINO",
+          p4Title: "Ocio, Deportes, Longevidad y Licencia de Casino",
+          p4List: "<li><strong>Licencia de casino:</strong> espacio privado de entretenimiento dentro de un entorno con acceso controlado.</li><li><strong>Bienestar y longevidad:</strong> tratamientos cortos gratuitos dentro de los 10 días y especiales con ampliación de estancia según clínica.</li>",
+          mpHeading: "Masterplan Interactivo de la Isla",
+          mpSub: "Seleccione una zona del mapa o un marcador para inspeccionar su función dentro del proyecto.",
+          svgLegacy: "Legacy Villas",
+          svgAir: "Pista & Aduana",
+          svgMarinas: "2 Marinas",
+          svgWellness: "Longevidad & Casino",
+          svgAgro: "Brahman & Manantial",
+          chipLegacy: "Legacy (50 Villas)",
+          chipAir: "Pista y Aduana",
+          chipMarinas: "2 Marinas",
+          chipWellness: "Longevidad & Casino",
+          chipAgro: "Brahman & Manantial",
+          zones: {
+            legacy: {
+              badge: "LEGACY · 50 VILLAS EN FIDEICOMISO",
+              title: "50 Villas Legacy Frente al Mar (Denniston)",
+              desc: "Villas en la orilla de la playa con precio de 25 MM USD en planos, incremento estimado en torno al +30 % al entregar Denniston las unidades finalizadas, 45 días de uso al año, 150,000 USD de mantenimiento anual y 4,5 % anual asegurado en fideicomiso en Panamá."
+            },
+            air: {
+              badge: "LOGÍSTICA PRIVADA",
+              title: "Aduana Privada y Pista para Jet Privado (Chárter)",
+              desc: "Acceso aéreo directo bajo modelo de vuelo chárter con aduana privada en la isla para máxima discreción y operatividad en el Golfo de Chiriquí."
+            },
+            marinas: {
+              badge: "INFRAESTRUCTURA NÁUTICA",
+              title: "Dos Marinas y Conectividad Marítima",
+              desc: "Dos marinas diseñadas para embarcaciones privadas, traslados rápidos y navegación en el Pacífico panameño."
+            },
+            wellness: {
+              badge: "LONGEVIDAD, OCIO Y CASINO",
+              title: "Tratamientos de Longevidad y Licencia de Casino",
+              desc: "Los socios Executive disfrutan de 10 días seguidos con tratamientos cortos/gratuitos y tratamientos especiales que amplían la estancia según la clínica, junto a un entorno con licencia de casino."
+            },
+            agro: {
+              badge: "AUTOSUFICIENCIA INTEGRAL",
+              title: "Manantial, 300 Cabezas Brahman, Huerta y Pesca",
+              desc: "Autosuficiencia energética e hídrica con manantial propio, ganadería de 300 cabezas de vacas Brahman, recogida diaria de hortalizas y pesca diaria."
+            }
+          },
+          memHeading: "Estructura de Membresías: Legacy (50) y Executive (5,000)",
+          memSub: "Dos categorías diferenciadas para anclar el patrimonio en fideicomiso y regular el acceso a la isla con control estricto.",
+          thAttr: "Parámetro",
+          thLeg: "Membresía LEGACY (50 Cupos)",
+          thExe: "Membresía EXECUTIVE (5,000 Cupos)",
+          compBody: "<tr><td><strong>Cupo total</strong></td><td>50 membresías (comprador de villa en fideicomiso)</td><td>5,000 membresías</td></tr><tr><td><strong>Precio / Cuota de alta</strong></td><td>25,000,000 USD en planos (+30 % estimado al entregar Denniston)</td><td>250,000 USD cuota inicial / nominal</td></tr><tr><td><strong>Mantenimiento anual</strong></td><td>150,000 USD / año</td><td>50,000 USD / año</td></tr><tr><td><strong>Uso y estancia anual</strong></td><td>45 días al año</td><td>10 días consecutivos de pernocta al año</td></tr><tr><td><strong>Retorno / Recompra</strong></td><td>4,5 % anual asegurado (según fideicomiso)</td><td>Recompra meses 1–60 suelo 150k USD; desde mes 61 al nominal (250k USD). Sin mercado secundario.</td></tr><tr><td><strong>Servicios / Beneficios</strong></td><td>Villa en fideicomiso + explotación proyectada por Aman Resorts o COMO Group + acceso total y casino</td><td>Titular + pareja e hijos (libro de familia o acuerdo); ocio, deportes, longevidad (cortos gratis; especiales amplían estancia según clínica) y casino</td></tr>",
+          legTierLbl: "CUPO LIMITADO · 50 UNIDADES",
+          legCardTitle: "Membresía LEGACY",
+          legCardPrice: "25,000,000 USD en planos · 150,000 USD/año mantenimiento",
+          legCardList: "<li><strong>Fideicomiso en Panamá:</strong> dirigida al comprador de una villa en la orilla de la playa (50 en total).</li><li><strong>Revalorización por entrega:</strong> al finalizar y entregar Denniston las villas, se estima un incremento en torno al <strong>+30 %</strong> sobre los 25 MM USD en planos.</li><li><strong>Operador internacional:</strong> explotación de la isla en negociación con <strong>Aman Resorts</strong> o <strong>COMO Group</strong>.</li><li><strong>Rentabilidad asegurada:</strong> <strong>4,5 % anual</strong> con derecho de uso de <strong>45 días al año</strong> y mantenimiento de <strong>150,000 USD</strong>.</li>",
+          btnSimLeg: "Simular Legacy",
+          btnLegLegal: "Ver Fideicomiso Panamá",
+          exeTierLbl: "CUPO MÁXIMO · 5,000 MEMBRESÍAS",
+          exeCardTitle: "Membresía EXECUTIVE",
+          exeCardPrice: "250,000 USD cuota de alta · 50,000 USD/año mantenimiento",
+          exeCardList: "<li><strong>Núcleo familiar:</strong> pensada para el propietario de la membresía con su <strong>pareja e hijos</strong>, según indique el libro de familia o se acuerde en la adquisición.</li><li><strong>10 días seguidos de pernocta:</strong> con servicios lúdicos, deportivos y tratamientos de longevidad.</li><li><strong>Clínica de longevidad:</strong> tratamientos cortos/gratuitos incluidos y <strong>tratamientos especiales</strong> que, cuadrando con la clínica, ajustan y amplían la estancia si es necesario.</li><li><strong>Recompra y control de acceso:</strong> opción de recompra durante los primeros <strong>60 meses con suelo de 150,000 USD</strong> y <strong>desde el mes 61 por el nominal (250,000 USD)</strong>. <strong>Sin mercado secundario</strong> para mantener el control de acceso.</li>",
+          btnSimExe: "Simular Executive",
+          btnExeDesk: "Solicitar Membresía",
+          simHeading: "Simulador Patrimonial y de Recompra",
+          simSub: "Evalúe escenarios para Membresía Legacy (villa 25M USD, +30% entrega Denniston, 4,5% anual, 150k USD mantenimiento) o Membresía Executive (250k USD alta, 50k USD mantenimiento, recompra 60m / 61m+).",
+          simModeLegacy: "Simulador LEGACY (25M USD)",
+          simModeExecutive: "Simulador EXECUTIVE (250k USD)",
+          lblLegYears: "Horizonte temporal (años)",
+          lblLegUplift: "Incremento estimado tras entrega Denniston (%)",
+          lblLegScope: "Alcance de cálculo",
+          optLeg1: "1 Villa Legacy (25,000,000 USD base)",
+          optLeg50: "Cartera completa 50 Villas Legacy (1,250,000,000 USD base)",
+          legSimNote: "Base en planos: 25,000,000 USD por villa · Retorno anual asegurado: 4,5 % sobre precio en planos · Mantenimiento anual: 150,000 USD/año · Uso: 45 días/año.",
+          kpiTLegBase: "Precio en Planos (Base)",
+          kpiTLegPost: "Valor Estimado Post-Entrega",
+          kpiTLegYield: "Retorno 4,5% Acumulado",
+          kpiTLegMaint: "Mantenimiento Acumulado",
+          lblExeMonth: "Mes de evaluación / posible recompra",
+          lblExeCount: "Número de membresías Executive",
+          exeSimNote: "Alta / nominal: 250,000 USD · Mantenimiento anual: 50,000 USD/año · Recompra meses 1–60: suelo de 150,000 USD · Desde mes 61: nominal de 250,000 USD · Sin mercado secundario.",
+          kpiTExeNom: "Cuota Inicial / Nominal",
+          kpiTExeBuy: "Valor de Recompra Aplicable",
+          kpiTExeMaint: "Mantenimiento Prorrateado",
+          kpiTExeTranche: "Tramo de Recompra",
+          legalHeading: "Marco Jurídico y Estructuración en la República de Panamá",
+          legalSub: "Articulación fiduciaria, contractual y operativa de El Mar a Lago del Siglo XXI - La Porcada en Chiriquí, Panamá.",
+          legC1T: "Fideicomiso Legacy (Ley 1 de 1984 · Panamá)",
+          legC1List: "<li>Las <strong>50 villas Legacy</strong> en la orilla de la playa (25 MM USD en planos) se estructuran bajo fideicomiso en Panamá para delimitar titularidades, hitos de entrega y administración patrimonial.</li><li>Se regulan contractualmente el derecho de uso de <strong>45 días al año</strong>, la cuota de mantenimiento de <strong>150,000 USD anuales</strong> y el compromiso de <strong>4,5 % anual asegurado</strong>.</li><li>La estimación de revalorización del <strong>+30 %</strong> al entregar Denniston las villas finalizadas y la explotación por <strong>Aman Resorts</strong> o <strong>COMO Group</strong> se reflejan con claridad diferenciando estimaciones y negociaciones en curso frente a cláusulas contractuales.</li>",
+          legC2T: "Contrato Executive, Recompra y Prohibición de Mercado Secundario",
+          legC2List: "<li>Cada una de las hasta <strong>5,000 membresías Executive</strong> (250,000 USD de cuota inicial/nominal; 50,000 USD de mantenimiento anual) se rige por contrato y reglamento interno en Panamá.</li><li>Acredita la entrada del titular junto a <strong>pareja e hijos</strong> según libro de familia o acuerdo en la adquisición, para estancias de <strong>10 días seguidos</strong> (ampliables por tratamientos especiales coordinados con la clínica).</li><li><strong>Sin mercado secundario:</strong> se prohíbe la reventa libre entre terceros para preservar el control de acceso a la isla. La opción de recompra garantiza un <strong>suelo de 150,000 USD hasta el mes 60</strong> y el <strong>nominal de 250,000 USD a partir del mes 61</strong>, conforme a los términos y condiciones del contrato.</li>",
+          legC3T: "Operaciones, Infraestructura y Licencia de Casino en Chiriquí",
+          legC3List: "<li>La operación de <strong>aduana privada</strong>, <strong>pista para jet privado (modelo vuelo chárter)</strong>, <strong>dos marinas</strong>, <strong>clínica de longevidad</strong> y <strong>licencia de casino</strong> se canaliza conforme a las normativas y autorizaciones aplicables en Panamá.</li><li>Los recursos propios de la isla —generación energética, manantial de agua, vacada de <strong>300 cabezas de ganado Brahman</strong>, recogida diaria de hortalizas y pesca diaria— se integran en el plan operativo y de gobernanza del activo.</li>",
+          legC4T: "Aviso Legal Institucional (República de Panamá)",
+          legC4P: "Esta plataforma privada de <strong>El Mar a Lago del Siglo XXI - La Porcada</strong> (Chiriquí, República de Panamá), promovida por <strong>Takyma Investment Pioneer</strong>, tiene carácter estrictamente informativo para invitados, compradores y contrapartes acreditadas. No constituye oferta pública de valores ni asesoría legal, fiscal o financiera vinculante. Los derechos de uso, rentabilidad del 4,5 %, mantenimiento, recompra de membresías Executive (suelo 150k USD hasta mes 60; nominal 250k USD desde mes 61), acuerdos de explotación hotelera (Aman Resorts / COMO Group) y permisos operativos en Panamá quedan sujetos a los contratos definitivos y a la legislación vigente.",
+          deskHeading: "Private Desk · Solicitud y Atención Confidencial",
+          deskSub: "Registro de interés para Membresía Legacy (50 villas), Membresía Executive (5,000 cupos) o consultas sobre el activo en Panamá.",
+          lblDeskName: "Nombre completo / Entidad o Family Office",
+          phDeskName: "Ej. Inversiones del Pacífico / Nombre",
+          lblDeskEmail: "Correo electrónico confidencial",
+          phDeskEmail: "nombre@entidad.com",
+          lblDeskProgram: "Programa o interés",
+          optDesk1: "Membresía LEGACY (Villa 25M USD · Fideicomiso)",
+          optDesk2: "Membresía EXECUTIVE (250k USD · 10 días / Longevidad)",
+          optDesk3: "Estructura del Activo / Operación en Panamá",
+          lblDeskFamily: "Núcleo familiar / Notas de adquisición",
+          phDeskFamily: "Ej. Titular, cónyuge e hijos según libro de familia",
+          lblDeskNotes: "Comentarios adicionales o preferencia de reunión",
+          phDeskNotes: "Indique si desea información sobre plazos de entrega, clínica de longevidad o condiciones de recompra.",
+          btnDeskSubmit: "Registrar Solicitud Privada",
+          footerLoc: "El Mar a Lago del Siglo XXI - La Porcada · Chiriquí, Panamá",
+          footerLegal: "Aviso Legal: Plataforma informativa privada bajo marco de la República de Panamá. Las condiciones de fideicomiso (Ley 1 de 1984), rentabilidad del 4,5 % anual en Legacy, mantenimiento, recompra de membresías Executive (150k USD hasta mes 60; nominal 250k USD desde mes 61) sin mercado secundario, estimaciones de entrega (+30 % Denniston), negociaciones hoteleras (Aman Resorts / COMO Group) y licencias sectoriales (incluida la licencia de casino) se rigen por los contratos definitivos y la normativa aplicable.",
+          credModalTitle: "Solicitar Credencial de Acceso",
+          credModalDesc: "Deje su correo o indique su perfil para habilitar una clave temporal de acceso a la plataforma privada.",
+          lblCredContact: "Correo electrónico o entidad",
+          btnCloseCred: "Cerrar",
+          btnGenCred: "Generar Clave Invitado",
+          yearSingular: "año",
+          yearPlural: "años",
+          villaSingular: "1 Villa Legacy",
+          villaPlural: "50 Villas Legacy",
+          monthLabel: "Mes",
+          memSingular: "membresía",
+          memPlural: "membresías",
+          tranche1: "Meses 1–60 (Suelo 150k)",
+          tranche2: "Desde Mes 61 (Nominal 250k)",
+          barPlans: "Planos",
+          barYield: "Retorno 4.5%",
+          barMaint: "Mantenim.",
+          axisM1: "Mes 1 (Suelo $150k)",
+          axisM60: "Mes 60 -> Mes 61 ($250k)",
+          axisM120: "Mes 120"
+        },
+        en: {
+          kicker: "PRIVATE ACCESS · GULF OF CHIRIQUÍ, PANAMA",
+          motto: "El Mar a Lago del Siglo XXI - La Porcada",
+          sub: "Takyma Investment Pioneer · Panama",
+          gateTitle: "Private Membership & Real Asset Platform",
+          gateDesc: "Restricted environment for accredited guests, trust villa buyers, Executive members, family offices, and institutional investors.",
+          prof1: "Member / Buyer",
+          prof2: "Family Office / Investor",
+          prof3: "Advisor / Intermediary",
+          profilePrefix: "Profile: ",
+          lockBtn: "Lock",
+          codePlaceholder: "Invitation code (e.g. PORCADA2026)",
+          enterCode: "Enter Portal",
+          vipDemo: "VIP Guest Access (Direct Demo)",
+          reqCred: "Request access credential",
+          invalidCode: "Code not recognized. Enter a valid code or click VIP Guest Access (Direct Demo).",
+          tabVision: "Vision & Island",
+          tabMemberships: "Memberships",
+          tabSimulator: "Simulator",
+          tabLegal: "Legal · Panama",
+          tabDesk: "Private Desk",
+          heroEyebrow: "EL MAR A LAGO DEL SIGLO XXI - LA PORCADA · 347 HECTARES · CHIRIQUÍ, PANAMA",
+          heroTitle: "Private sovereignty, Denniston architecture, and full self-sufficiency in the Panamanian Pacific.",
+          heroSubtitle: "Structured as a tightly controlled enclave combining 50 Legacy trust villas and up to 5,000 Executive memberships, supported by private island customs, private jet airstrip under a charter flight model, two marinas, energy and water self-sufficiency, on-site production, and a casino license.",
+          ctaMem: "Explore Legacy & Executive Memberships",
+          ctaSim: "Open Value & Buyback Simulator",
+          capBeachT: "Private Coastal Hospitality",
+          capBeachD: "Low-density sanctuary with absolute privacy for members and families.",
+          capWellT: "Longevity Program",
+          capWellD: "Included preventive protocols plus specialized treatments with stay extension.",
+          capFoT: "Global Family Office Reach",
+          capFoD: "International outreach with strict governance and access control in Panama.",
+          pillarsHeading: "Four Pillars of El Mar a Lago del Siglo XXI - La Porcada",
+          pillarsSub: "Autonomous infrastructure, world-renowned architecture, and operational exclusivity in the Gulf of Chiriquí.",
+          p1Num: "01 · LOGISTICS & SOVEREIGNTY",
+          p1Title: "Private Customs, Charter Airstrip & Two Marinas",
+          p1List: "<li><strong>Private island customs:</strong> discreet arrival with zero commercial terminal exposure.</li><li><strong>Private jet airstrip:</strong> operated under a dedicated charter flight model.</li><li><strong>Two marinas:</strong> nautical infrastructure for yachts, sport vessels, and transfers.</li>",
+          p2Num: "02 · SELF-SUFFICIENCY & FARM-TO-TABLE",
+          p2Title: "Energy, Natural Spring, Brahman Cattle, Gardens & Fishing",
+          p2List: "<li><strong>Energy self-sufficiency:</strong> independent on-site power generation and backup.</li><li><strong>Natural spring water:</strong> pure island water source paired with local agriculture and fishing.</li><li><strong>300-head Brahman cattle herd:</strong> proprietary livestock alongside daily vegetable harvests and daily catch.</li>",
+          p3Num: "03 · ARCHITECTURE & HOSPITALITY OPERATOR",
+          p3Title: "Denniston Design & Negotiations with Aman Resorts or COMO Group",
+          p3List: "<li><strong>Villas designed by Denniston:</strong> estimated ~+30% value uplift over the USD 25M off-plan price upon completed handover.</li><li><strong>Ultra-luxury hospitality operator:</strong> active negotiations with <strong>Aman Resorts</strong> or <strong>COMO Group</strong> to operate the island.</li>",
+          p4Num: "04 · PRIVATE CLUB & CASINO LICENSE",
+          p4Title: "Leisure, Sports, Longevity & Casino License",
+          p4List: "<li><strong>Casino license:</strong> private gaming and entertainment venue within a controlled-access sanctuary.</li><li><strong>Wellness & longevity:</strong> complimentary short protocols within the 10-day stay and specialized treatments extending stay per clinic schedule.</li>",
+          mpHeading: "Interactive Island Masterplan",
+          mpSub: "Select a map zone or marker to inspect its role within the development.",
+          svgLegacy: "Legacy Villas",
+          svgAir: "Airstrip & Customs",
+          svgMarinas: "2 Marinas",
+          svgWellness: "Longevity & Casino",
+          svgAgro: "Brahman & Spring",
+          chipLegacy: "Legacy (50 Villas)",
+          chipAir: "Airstrip & Customs",
+          chipMarinas: "2 Marinas",
+          chipWellness: "Longevity & Casino",
+          chipAgro: "Brahman & Spring",
+          zones: {
+            legacy: {
+              badge: "LEGACY · 50 TRUST VILLAS",
+              title: "50 Beachfront Legacy Villas (Denniston)",
+              desc: "Beachfront villas priced at USD 25M off-plan, projected ~+30% uplift upon completed handover by Denniston, 45 days of annual use, USD 150,000 annual maintenance, and 4.5% guaranteed annual return under a Panamanian trust."
+            },
+            air: {
+              badge: "PRIVATE LOGISTICS",
+              title: "Private Customs & Private Jet Airstrip (Charter)",
+              desc: "Direct air access under a charter flight model with on-island private customs for maximum discretion in the Gulf of Chiriquí."
+            },
+            marinas: {
+              badge: "NAUTICAL INFRASTRUCTURE",
+              title: "Two Marinas & Maritime Connectivity",
+              desc: "Twin marinas engineered for private yachts, rapid transfers, and Pacific navigation."
+            },
+            wellness: {
+              badge: "LONGEVITY, LEISURE & CASINO",
+              title: "Longevity Clinic & Private Casino License",
+              desc: "Executive members enjoy 10 consecutive nights with complimentary short treatments and specialized protocols that extend the stay with the clinic, alongside a licensed private casino."
+            },
+            agro: {
+              badge: "FULL SELF-SUFFICIENCY",
+              title: "Natural Spring, 300 Brahman Cattle, Gardens & Fishing",
+              desc: "Energy and water self-sufficiency with natural spring water, 300-head Brahman cattle herd, daily vegetable harvesting, and daily fishing."
+            }
+          },
+          memHeading: "Membership Architecture: Legacy (50) & Executive (5,000)",
+          memSub: "Two distinct tiers designed to anchor trust real estate equity and regulate island access with strict curation.",
+          thAttr: "Parameter",
+          thLeg: "LEGACY Membership (50 Slots)",
+          thExe: "EXECUTIVE Membership (5,000 Slots)",
+          compBody: "<tr><td><strong>Total allocation</strong></td><td>50 memberships (beachfront villa buyer in trust)</td><td>5,000 memberships</td></tr><tr><td><strong>Price / Initiation fee</strong></td><td>USD 25,000,000 off-plan (~+30% estimated at Denniston handover)</td><td>USD 250,000 initiation / par value</td></tr><tr><td><strong>Annual maintenance</strong></td><td>USD 150,000 / year</td><td>USD 50,000 / year</td></tr><tr><td><strong>Annual stay / use</strong></td><td>45 days per year</td><td>10 consecutive nights per year</td></tr><tr><td><strong>Return / Buyback</strong></td><td>4.5% guaranteed annual return (per trust agreement)</td><td>Buyback months 1–60 floor USD 150k; month 61+ at par (USD 250k). No secondary market.</td></tr><tr><td><strong>Services / Benefits</strong></td><td>Trust villa + projected operation by Aman Resorts or COMO Group + full access & casino</td><td>Holder + spouse & children (family book or purchase agreement); leisure, sports, longevity (short free; specialized extend stay per clinic) & casino</td></tr>",
+          legTierLbl: "LIMITED ALLOCATION · 50 UNITS",
+          legCardTitle: "LEGACY Membership",
+          legCardPrice: "USD 25,000,000 off-plan · USD 150,000/yr maintenance",
+          legCardList: "<li><strong>Panamanian Trust:</strong> structured for buyers of one of the 50 beachfront villas.</li><li><strong>Handover appreciation:</strong> upon completed delivery by Denniston, valuation is projected to increase by ~<strong>+30%</strong> over the USD 25M off-plan price.</li><li><strong>International operator:</strong> island hospitality operation under negotiation with <strong>Aman Resorts</strong> or <strong>COMO Group</strong>.</li><li><strong>Guaranteed return:</strong> <strong>4.5% per annum</strong> with <strong>45 days/year</strong> of private use and <strong>USD 150,000</strong> annual maintenance.</li>",
+          btnSimLeg: "Simulate Legacy",
+          btnLegLegal: "View Panama Trust",
+          exeTierLbl: "MAXIMUM ALLOCATION · 5,000 MEMBERSHIPS",
+          exeCardTitle: "EXECUTIVE Membership",
+          exeCardPrice: "USD 250,000 initiation · USD 50,000/yr maintenance",
+          exeCardList: "<li><strong>Family household:</strong> covers the membership holder plus <strong>spouse and children</strong>, per family registry book or acquisition agreement.</li><li><strong>10 consecutive nights:</strong> overnight island stay with full leisure, sports, and longevity services.</li><li><strong>Longevity clinic:</strong> complimentary short protocols included plus <strong>specialized treatments</strong> scheduled with the clinic that extend the stay as required.</li><li><strong>Buyback & access control:</strong> buyback option during the first <strong>60 months at a USD 150,000 floor</strong> and <strong>from month 61 at full par (USD 250,000)</strong>. <strong>No secondary market</strong> permitted to preserve access control.</li>",
+          btnSimExe: "Simulate Executive",
+          btnExeDesk: "Apply for Membership",
+          simHeading: "Equity & Buyback Simulator",
+          simSub: "Model scenarios for Legacy Membership (USD 25M villa, +30% Denniston handover, 4.5% annual yield, USD 150k maintenance) or Executive Membership (USD 250k initiation, USD 50k maintenance, 60m / 61m+ buyback).",
+          simModeLegacy: "LEGACY Simulator (USD 25M)",
+          simModeExecutive: "EXECUTIVE Simulator (USD 250k)",
+          lblLegYears: "Time horizon (years)",
+          lblLegUplift: "Estimated uplift at Denniston handover (%)",
+          lblLegScope: "Calculation scope",
+          optLeg1: "1 Legacy Villa (USD 25,000,000 base)",
+          optLeg50: "Full Portfolio 50 Legacy Villas (USD 1,250,000,000 base)",
+          legSimNote: "Off-plan base: USD 25,000,000 per villa · Guaranteed annual return: 4.5% on off-plan price · Annual maintenance: USD 150,000/yr · Use: 45 days/yr.",
+          kpiTLegBase: "Off-Plan Price (Base)",
+          kpiTLegPost: "Estimated Post-Handover Value",
+          kpiTLegYield: "Cumulative 4.5% Return",
+          kpiTLegMaint: "Cumulative Maintenance",
+          lblExeMonth: "Evaluation / potential buyback month",
+          lblExeCount: "Number of Executive memberships",
+          exeSimNote: "Initiation / par: USD 250,000 · Annual maintenance: USD 50,000/yr · Buyback months 1–60: USD 150,000 floor · Month 61+: USD 250,000 par · No secondary market.",
+          kpiTExeNom: "Initiation Fee / Par Value",
+          kpiTExeBuy: "Applicable Buyback Value",
+          kpiTExeMaint: "Prorated Maintenance",
+          kpiTExeTranche: "Buyback Tranche",
+          legalHeading: "Legal & Fiduciary Framework in the Republic of Panama",
+          legalSub: "Fiduciary, contractual, and operational structure of El Mar a Lago del Siglo XXI - La Porcada in Chiriquí, Panama.",
+          legC1T: "Legacy Trust (Law 1 of 1984 · Panama)",
+          legC1List: "<li>The <strong>50 beachfront Legacy villas</strong> (USD 25M off-plan) are structured under a Panamanian trust to ring-fence title, delivery milestones, and asset governance.</li><li>Contractually governs the <strong>45-day annual use</strong> right, the <strong>USD 150,000 annual maintenance</strong> fee, and the <strong>4.5% guaranteed annual return</strong>.</li><li>The estimated ~<strong>+30%</strong> uplift upon completed delivery by Denniston and operation by <strong>Aman Resorts</strong> or <strong>COMO Group</strong> are clearly distinguished as projections/ongoing negotiations versus binding trust clauses.</li>",
+          legC2T: "Executive Contract, Buyback & No Secondary Market",
+          legC2List: "<li>Each of the up to <strong>5,000 Executive memberships</strong> (USD 250,000 initiation/par; USD 50,000 annual maintenance) is governed by private contract and club bylaws in Panama.</li><li>Grants access to the holder plus <strong>spouse and children</strong> per family book or acquisition agreement for <strong>10 consecutive nights</strong> (extendable for specialized clinical treatments).</li><li><strong>No secondary market:</strong> private resale to third parties is prohibited to preserve island access control. The buyback option provides a <strong>USD 150,000 floor through month 60</strong> and <strong>USD 250,000 par from month 61</strong> under definitive contract terms.</li>",
+          legC3T: "Operations, Infrastructure & Casino License in Chiriquí",
+          legC3List: "<li>Operation of <strong>private customs</strong>, <strong>private jet airstrip (charter flight model)</strong>, <strong>two marinas</strong>, <strong>longevity clinic</strong>, and <strong>casino license</strong> is structured under applicable Panamanian regulations and permits.</li><li>On-island resources —power generation, natural spring water, <strong>300-head Brahman cattle herd</strong>, daily vegetable harvest, and daily catch— are integrated into the asset's operating governance.</li>",
+          legC4T: "Institutional Legal Notice (Republic of Panama)",
+          legC4P: "This private platform for <strong>El Mar a Lago del Siglo XXI - La Porcada</strong> (Chiriquí, Republic of Panama), promoted by <strong>Takyma Investment Pioneer</strong>, is strictly informational for invited guests, buyers, and accredited counterparties. It does not constitute a public securities offering or binding legal, tax, or financial advice. Use rights, 4.5% annual return, maintenance, Executive buyback terms (USD 150k floor through month 60; USD 250k par from month 61), hotel management agreements (Aman Resorts / COMO Group), and Panamanian sector permits remain subject to definitive contracts and applicable law.",
+          deskHeading: "Private Desk · Confidential Inquiry & Admission",
+          deskSub: "Register interest for Legacy Membership (50 villas), Executive Membership (5,000 slots), or asset inquiries in Panama.",
+          lblDeskName: "Full name / Entity or Family Office",
+          phDeskName: "e.g. Pacific Holdings / Full Name",
+          lblDeskEmail: "Confidential email address",
+          phDeskEmail: "name@entity.com",
+          lblDeskProgram: "Program or inquiry type",
+          optDesk1: "LEGACY Membership (USD 25M Villa · Trust)",
+          optDesk2: "EXECUTIVE Membership (USD 250k · 10 nights / Longevity)",
+          optDesk3: "Asset Structure / Panama Operations",
+          lblDeskFamily: "Family household / Acquisition notes",
+          phDeskFamily: "e.g. Holder, spouse & children per family book",
+          lblDeskNotes: "Additional notes or meeting preference",
+          phDeskNotes: "Indicate interest in handover timelines, longevity clinic protocols, or buyback terms.",
+          btnDeskSubmit: "Submit Private Inquiry",
+          footerLoc: "El Mar a Lago del Siglo XXI - La Porcada · Chiriquí, Panama",
+          footerLegal: "Legal Notice: Private informational platform under the Republic of Panama framework. Trust terms (Law 1 of 1984), 4.5% annual return on Legacy, maintenance, Executive membership buyback (150k USD floor through month 60; 250k USD par from month 61) with no secondary market, handover estimates (+30% Denniston), hotel operator negotiations (Aman Resorts / COMO Group), and sector licenses (including casino license) are governed by definitive agreements and applicable law.",
+          credModalTitle: "Request Access Credential",
+          credModalDesc: "Provide your email or profile to generate a temporary access key for the private platform.",
+          lblCredContact: "Email address or entity",
+          btnCloseCred: "Close",
+          btnGenCred: "Generate Guest Key",
+          yearSingular: "year",
+          yearPlural: "years",
+          villaSingular: "1 Legacy Villa",
+          villaPlural: "50 Legacy Villas",
+          monthLabel: "Month",
+          memSingular: "membership",
+          memPlural: "memberships",
+          tranche1: "Months 1–60 (USD 150k Floor)",
+          tranche2: "Month 61+ (USD 250k Par)",
+          barPlans: "Off-Plan",
+          barYield: "4.5% Return",
+          barMaint: "Maint.",
+          axisM1: "Month 1 ($150k Floor)",
+          axisM60: "Month 60 -> Month 61 ($250k)",
+          axisM120: "Month 120"
+        },
+        ru: {
+          kicker: "ЗАКРЫТЫЙ ДОСТУП · ЗАЛИВ ЧИРИКИ, ПАНАМА",
+          motto: "El Mar a Lago del Siglo XXI - La Porcada",
+          sub: "Takyma Investment Pioneer · Панама",
+          gateTitle: "Частная платформа членства и развития актива",
+          gateDesc: "Закрытая среда для аккредитованных гостей, покупателей вилл в трасте, участников Executive, family offices и институциональных инвесторов.",
+          prof1: "Участник / Покупатель",
+          prof2: "Family Office / Инвестор",
+          prof3: "Советник / Посредник",
+          profilePrefix: "Профиль: ",
+          lockBtn: "Выйти",
+          codePlaceholder: "Код приглашения (напр. PORCADA2026)",
+          enterCode: "Войти на портал",
+          vipDemo: "VIP-доступ гостя (прямое демо)",
+          reqCred: "Запросить учётные данные",
+          invalidCode: "Код не распознан. Введите действительный код или нажмите VIP-доступ гостя (прямое демо).",
+          tabVision: "Концепция и остров",
+          tabMemberships: "Членство",
+          tabSimulator: "Симулятор",
+          tabLegal: "Право · Панама",
+          tabDesk: "Private Desk",
+          heroEyebrow: "EL MAR A LAGO DEL SIGLO XXI - LA PORCADA · 347 ГА · ЧИРИКИ, ПАНАМА",
+          heroTitle: "Частный суверенитет, архитектура Denniston и автономность на тихоокеанском побережье Панамы.",
+          heroSubtitle: "Проект закрытого доступа, объединяющий 50 вилл Legacy в трасте и до 5 000 членств Executive: частная таможня на острове, взлётно-посадочная полоса для частных джетов по чартерной модели, две марины, энерго- и водоавтономность, собственное хозяйство и лицензия казино.",
+          ctaMem: "Открыть членство Legacy и Executive",
+          ctaSim: "Открыть симулятор стоимости и выкупа",
+          capBeachT: "Частное гостеприимство на побережье",
+          capBeachD: "Низкая плотность застройки и абсолютная приватность для участников и их семей.",
+          capWellT: "Программа долголетия",
+          capWellD: "Включённые профилактические протоколы и специальные программы с продлением пребывания.",
+          capFoT: "Глобальная сеть Family Offices",
+          capFoD: "Международное привлечение инвесторов со строгим контролем доступа в Панаме.",
+          pillarsHeading: "Четыре опоры El Mar a Lago del Siglo XXI - La Porcada",
+          pillarsSub: "Автономная инфраструктура, мировая архитектура и операционная эксклюзивность в заливе Чирики.",
+          p1Num: "01 · ЛОГИСТИКА И СУВЕРЕНИТЕТ",
+          p1Title: "Частная таможня, чартерная ВПП и две марины",
+          p1List: "<li><strong>Частная таможня на острове:</strong> конфиденциальное прибытие без коммерческих терминалов.</li><li><strong>Полоса для частных джетов:</strong> эксплуатация по модели чартерных рейсов.</li><li><strong>Две марины:</strong> инфраструктура для яхт, катеров и морских трансферов.</li>",
+          p2Num: "02 · АВТОНОМНОСТЬ И СОБСТВЕННОЕ ПРОИЗВОДСТВО",
+          p2Title: "Энергия, родник, стадо Брахман, огород и рыбалка",
+          p2List: "<li><strong>Энергоавтономность:</strong> собственная генерация и независимое обеспечение.</li><li><strong>Собственный родник:</strong> природный источник пресной воды на острове.</li><li><strong>Стадо из 300 голов скота Брахман:</strong> собственное хозяйство, ежедневный сбор овощей и ежедневный улов рыбы.</li>",
+          p3Num: "03 · АРХИТЕКТУРА И ОТЕЛЬНЫЙ ОПЕРАТОР",
+          p3Title: "Denniston и переговоры с Aman Resorts или COMO Group",
+          p3List: "<li><strong>Виллы от Denniston:</strong> прогнозируемый рост стоимости около +30% к цене на этапе проекта (25 млн USD) после сдачи.</li><li><strong>Оператор уровня ultra-luxury:</strong> ведутся переговоры с <strong>Aman Resorts</strong> или <strong>COMO Group</strong> об управлении островом.</li>",
+          p4Num: "04 · ЧАСТНЫЙ КЛУБ И ЛИЦЕНЗИЯ КАЗИНО",
+          p4Title: "Досуг, спорт, долголетие и лицензия казино",
+          p4List: "<li><strong>Лицензия казино:</strong> закрытое пространство развлечений в среде со строгим контролем доступа.</li><li><strong>Медицина долголетия:</strong> бесплатные короткие процедуры в рамках 10 дней и специальные курсы с продлением проживания по назначению клиники.</li>",
+          mpHeading: "Интерактивный мастер-план острова",
+          mpSub: "Выберите зону на карте или маркер, чтобы изучить её назначение в проекте.",
+          svgLegacy: "Виллы Legacy",
+          svgAir: "ВПП и таможня",
+          svgMarinas: "2 марины",
+          svgWellness: "Долголетие и казино",
+          svgAgro: "Брахман и родник",
+          chipLegacy: "Legacy (50 вилл)",
+          chipAir: "ВПП и таможня",
+          chipMarinas: "2 марины",
+          chipWellness: "Долголетие и казино",
+          chipAgro: "Брахман и родник",
+          zones: {
+            legacy: {
+              badge: "LEGACY · 50 ВИЛЛ В ТРАСТЕ",
+              title: "50 береговых вилл Legacy (Denniston)",
+              desc: "Виллы на первой береговой линии стоимостью 25 млн USD на этапе проекта с прогнозируемым ростом ~+30% после сдачи Denniston, правом проживания 45 дней в году, обслуживанием 150 000 USD/год и гарантированной доходностью 4,5% годовых по трасту в Панаме."
+            },
+            air: {
+              badge: "ЧАСТНАЯ ЛОГИСТИКА",
+              title: "Частная таможня и ВПП для частных джетов (чартер)",
+              desc: "Прямое авиасообщение по чартерной модели с собственной таможней на острове для полной конфиденциальности в заливе Чирики."
+            },
+            marinas: {
+              badge: "МОРСКАЯ ИНФРАСТРУКТУРА",
+              title: "Две марины и морская логистика",
+              desc: "Две марины для частных яхт, скоростных трансферов и навигации в Тихом океане."
+            },
+            wellness: {
+              badge: "ДОЛГОЛЕТИЕ, ДОСУГ И КАЗИНО",
+              title: "Клиника долголетия и лицензия казино",
+              desc: "Участники Executive получают 10 дней подряд с бесплатными короткими процедурами и специальными программами с продлением проживания по согласованию с клиникой, а также доступ в приватное казино."
+            },
+            agro: {
+              badge: "ПОЛНАЯ АВТОНОМНОСТЬ",
+              title: "Родник, 300 голов Брахман, огород и рыбалка",
+              desc: "Энергетическая и водная автономность с природным родником, стадом из 300 голов скота Брахман, ежедневным сбором овощей и свежей рыбой."
+            }
+          },
+          memHeading: "Структура членства: Legacy (50) и Executive (5 000)",
+          memSub: "Две взаимодополняющие программы для защиты капитала в трасте и строгого контроля доступа на остров.",
+          thAttr: "Параметр",
+          thLeg: "Членство LEGACY (50 квот)",
+          thExe: "Членство EXECUTIVE (5 000 квот)",
+          compBody: "<tr><td><strong>Общая квота</strong></td><td>50 членств (покупатель виллы в трасте)</td><td>5 000 членств</td></tr><tr><td><strong>Цена / Вступительный взнос</strong></td><td>25 000 000 USD на этапе проекта (~+30% после сдачи Denniston)</td><td>250 000 USD вступительный взнос / номинал</td></tr><tr><td><strong>Ежегодное обслуживание</strong></td><td>150 000 USD / год</td><td>50 000 USD / год</td></tr><tr><td><strong>Проживание в году</strong></td><td>45 дней в году</td><td>10 дней подряд с проживанием в году</td></tr><tr><td><strong>Доходность / Обратный выкуп</strong></td><td>Гарантированные 4,5% годовых (по договору траста)</td><td>Выкуп мес. 1–60 порог 150 тыс. USD; с 61-го мес. по номиналу (250 тыс. USD). Без вторичного рынка.</td></tr><tr><td><strong>Услуги и привилегии</strong></td><td>Вилла в трасте + управление Aman Resorts или COMO Group + полный доступ и казино</td><td>Владелец + супруг(а) и дети (по семейной книге или договору); отдых, спорт, клиника долголетия (короткие бесплатно; спецкурсы продлевают пребывание) и казино</td></tr>",
+          legTierLbl: "ОГРАНИЧЕННАЯ КВОТА · 50 ВИЛЛ",
+          legCardTitle: "Членство LEGACY",
+          legCardPrice: "25 000 000 USD на этапе проекта · 150 000 USD/год обслуживание",
+          legCardList: "<li><strong>Траст в Панаме:</strong> предназначено для покупателя береговой виллы (всего 50 вилл).</li><li><strong>Рост стоимости при сдаче:</strong> после завершения строительства студией Denniston ожидается рост цены около <strong>+30%</strong> к 25 млн USD на этапе проекта.</li><li><strong>Международный оператор:</strong> ведутся переговоры с <strong>Aman Resorts</strong> или <strong>COMO Group</strong> об управлении островом.</li><li><strong>Гарантированная доходность:</strong> <strong>4,5% годовых</strong>, <strong>45 дней/год</strong> проживания и обслуживание <strong>150 000 USD</strong> в год.</li>",
+          btnSimLeg: "Симулятор Legacy",
+          btnLegLegal: "Траст в Панаме",
+          exeTierLbl: "МАКСИМАЛЬНАЯ КВОТА · 5 000 УЧАСТНИКОВ",
+          exeCardTitle: "Членство EXECUTIVE",
+          exeCardPrice: "250 000 USD вступительный взнос · 50 000 USD/год обслуживание",
+          exeCardList: "<li><strong>Семейный доступ:</strong> рассчитано на владельца членства, <strong>супруга(у) и детей</strong> согласно семейной книге или условиям приобретения.</li><li><strong>10 дней подряд на острове:</strong> проживание, спортивная и досуговая инфраструктура, программы долголетия.</li><li><strong>Клиника долголетия:</strong> бесплатные короткие процедуры включены, а <strong>специальные программы</strong> при согласовании с клиникой продлевают срок пребывания.</li><li><strong>Обратный выкуп и контроль доступа:</strong> выкуп в первые <strong>60 месяцев с порогом 150 000 USD</strong> и <strong>с 61-го месяца по номиналу (250 000 USD)</strong>. <strong>Вторичный рынок запрещён</strong> для сохранения контроля доступа.</li>",
+          btnSimExe: "Симулятор Executive",
+          btnExeDesk: "Подать заявку",
+          simHeading: "Симулятор капитала и обратного выкупа",
+          simSub: "Расчёт сценариев для Legacy (вилла 25 млн USD, +30% Denniston, 4,5% годовых, 150 тыс. USD обслуживание) и Executive (250 тыс. USD взнос, 50 тыс. USD обслуживание, выкуп 60 мес. / 61+ мес.).",
+          simModeLegacy: "Симулятор LEGACY (25 млн USD)",
+          simModeExecutive: "Симулятор EXECUTIVE (250 тыс. USD)",
+          lblLegYears: "Горизонт расчёта (лет)",
+          lblLegUplift: "Ожидаемый рост после сдачи Denniston (%)",
+          lblLegScope: "Масштаб расчёта",
+          optLeg1: "1 вилла Legacy (база 25 000 000 USD)",
+          optLeg50: "Весь портфель 50 вилл Legacy (база 1 250 000 000 USD)",
+          legSimNote: "База на этапе проекта: 25 000 000 USD за виллу · Гарантированный доход: 4,5% годовых · Обслуживание: 150 000 USD/год · Проживание: 45 дней/год.",
+          kpiTLegBase: "Цена на этапе проекта (база)",
+          kpiTLegPost: "Оценка после сдачи Denniston",
+          kpiTLegYield: "Накопленный доход 4,5%",
+          kpiTLegMaint: "Накопленное обслуживание",
+          lblExeMonth: "Месяц оценки / обратного выкупа",
+          lblExeCount: "Количество членств Executive",
+          exeSimNote: "Номинал / взнос: 250 000 USD · Обслуживание: 50 000 USD/год · Выкуп мес. 1–60: порог 150 000 USD · С 61-го мес.: номинал 250 000 USD · Без вторичного рынка.",
+          kpiTExeNom: "Вступительный взнос / Номинал",
+          kpiTExeBuy: "Применимая цена выкупа",
+          kpiTExeMaint: "Обслуживание за период",
+          kpiTExeTranche: "Период выкупа",
+          legalHeading: "Правовая и трастовая структура в Республике Панама",
+          legalSub: "Трастовое, договорное и операционное регулирование El Mar a Lago del Siglo XXI - La Porcada в Чирики, Панама.",
+          legC1T: "Траст Legacy (Закон 1 от 1984 г. · Панама)",
+          legC1List: "<li><strong>50 береговых вилл Legacy</strong> (25 млн USD на этапе проекта) структурируются через траст в Панаме для защиты прав собственности, этапов сдачи и управления активом.</li><li>Договором закрепляются право проживания <strong>45 дней в году</strong>, взнос на обслуживание <strong>150 000 USD/год</strong> и гарантированная доходность <strong>4,5% годовых</strong>.</li><li>Ожидаемый рост стоимости на <strong>+30%</strong> после сдачи вилл студией Denniston и управление <strong>Aman Resorts</strong> или <strong>COMO Group</strong> чётко разграничены как прогнозы и текущие переговоры.</li>",
+          legC2T: "Договор Executive, выкуп и запрет вторичного рынка",
+          legC2List: "<li>Каждое из до <strong>5 000 членств Executive</strong> (250 000 USD взнос/номинал; 50 000 USD/год обслуживание) регулируется частным договором и регламентом клуба в Панаме.</li><li>Подтверждает право доступа владельца, <strong>супруга(и) и детей</strong> по семейной книге или договору на <strong>10 дней подряд</strong> (с возможностью продления для специальных медицинских программ).</li><li><strong>Без вторичного рынка:</strong> свободная перепродажа третьим лицам запрещена для сохранения контроля доступа на остров. Опцион обратного выкупа гарантирует <strong>порог 150 000 USD до 60-го месяца</strong> и <strong>номинал 250 000 USD с 61-го месяца</strong> согласно условиям договора.</li>",
+          legC3T: "Инфраструктура и лицензия казино в Чирики",
+          legC3List: "<li>Деятельность <strong>частной таможни</strong>, <strong>ВПП для частных джетов (чартер)</strong>, <strong>двух марин</strong>, <strong>клиники долголетия</strong> и <strong>лицензии казино</strong> осуществляется в соответствии с законодательством и разрешениями Панамы.</li><li>Ресурсы острова — собственная энергетика, родник, стадо <strong>300 голов скота Брахман</strong>, ежедневный сбор овощей и улов рыбы — интегрированы в операционное управление проектом.</li>",
+          legC4T: "Институциональное правовое уведомление (Республика Панама)",
+          legC4P: "Данная закрытая платформа <strong>El Mar a Lago del Siglo XXI - La Porcada</strong> (Чирики, Республика Панама), продвигаемая <strong>Takyma Investment Pioneer</strong>, носит исключительно информационный характер для приглашённых лиц, покупателей и аккредитованных контрагентов. Она не является публичной офертой ценных бумаг или юридической/финансовой консультацией. Права пользования, доходность 4,5%, обслуживание, обратный выкуп Executive (порог 150 тыс. USD до 60-го мес.; номинал 250 тыс. USD с 61-го мес.), соглашения с отельными операторами (Aman Resorts / COMO Group) и отраслевые лицензии в Панаме регулируются окончательными договорами и действующим правом.",
+          deskHeading: "Private Desk · Конфиденциальная заявка",
+          deskSub: "Регистрация интереса по членству Legacy (50 вилл), Executive (5 000 квот) или структуре актива в Панаме.",
+          lblDeskName: "ФИО / Компания или Family Office",
+          phDeskName: "Напр. Pacific Holdings / Имя Фамилия",
+          lblDeskEmail: "Конфиденциальный e-mail",
+          phDeskEmail: "name@entity.com",
+          lblDeskProgram: "Программа или направление интереса",
+          optDesk1: "Членство LEGACY (Вилла 25 млн USD · Траст)",
+          optDesk2: "Членство EXECUTIVE (250 тыс. USD · 10 дней / Долголетие)",
+          optDesk3: "Структура актива / Операции в Панаме",
+          lblDeskFamily: "Состав семьи / Примечания",
+          phDeskFamily: "Напр. Владелец, супруг(а) и дети по семейной книге",
+          lblDeskNotes: "Дополнительные комментарии или пожелания по встрече",
+          phDeskNotes: "Укажите интересующие вопросы по срокам сдачи, клинике долголетия или условиям выкупа.",
+          btnDeskSubmit: "Отправить конфиденциальную заявку",
+          footerLoc: "El Mar a Lago del Siglo XXI - La Porcada · Чирики, Панама",
+          footerLegal: "Правовое уведомление: Частная информационная платформа в рамках законодательства Республики Панама. Условия траста (Закон 1 от 1984 г.), доходность 4,5% годовых по Legacy, обслуживание, обратный выкуп Executive (порог 150 тыс. USD до 60-го месяца; номинал 250 тыс. USD с 61-го месяца) без вторичного рынка, оценки при сдаче (+30% Denniston), переговоры с операторами (Aman Resorts / COMO Group) и лицензии (включая лицензию казино) определяются окончательными договорами и применимым правом.",
+          credModalTitle: "Запрос учётных данных доступа",
+          credModalDesc: "Укажите ваш e-mail или профиль, чтобы получить временный гостевой код для входа на платформу.",
+          lblCredContact: "E-mail или организация",
+          btnCloseCred: "Закрыть",
+          btnGenCred: "Создать гостевой код",
+          yearSingular: "год",
+          yearPlural: "лет",
+          villaSingular: "1 вилла Legacy",
+          villaPlural: "50 вилл Legacy",
+          monthLabel: "Месяц",
+          memSingular: "членство",
+          memPlural: "членств",
+          tranche1: "Мес. 1–60 (Порог 150k)",
+          tranche2: "С 61-го мес. (Номинал 250k)",
+          barPlans: "Проект",
+          barYield: "Доход 4.5%",
+          barMaint: "Обслуж.",
+          axisM1: "Мес. 1 (Порог $150k)",
+          axisM60: "Мес. 60 -> Мес. 61 ($250k)",
+          axisM120: "Мес. 120"
+        }
+      };
+
+      let currentLang = "es";
+      let currentProfileIdx = "1";
+      let activeZone = "legacy";
+
+      function formatUSD(num) {
+        return "$" + Math.round(num).toLocaleString("en-US");
+      }
+
+      function setText(id, val) {
+        const el = document.getElementById(id);
+        if (el) el.textContent = val;
+      }
+
+      function setHTML(id, val) {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = val;
+      }
+
+      function renderZone(zKey) {
+        activeZone = zKey;
+        const t = I18N[currentLang] || I18N.es;
+        const zData = t.zones[zKey];
+        if (!zData) return;
+        setText("zone-badge", zData.badge);
+        setText("zone-title", zData.title);
+        setText("zone-desc", zData.desc);
+        document.querySelectorAll(".zone-chip").forEach((c) => {
+          c.classList.toggle("active", c.getAttribute("data-zone") === zKey);
+        });
+      }
+
+      function applyLanguage(lang) {
+        currentLang = lang;
+        const t = I18N[lang] || I18N.es;
+        document.documentElement.lang = lang;
+
+        document.querySelectorAll(".lang-btn").forEach((btn) => {
+          btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);
+        });
+
+        setText("gate-kicker", t.kicker);
+        setText("gate-motto", t.motto);
+        setText("hdr-motto", t.motto);
+        setText("hdr-sub", t.sub);
+        setText("gate-title", t.gateTitle);
+        setText("gate-desc", t.gateDesc);
+        setText("prof-1", t.prof1);
+        setText("prof-2", t.prof2);
+        setText("prof-3", t.prof3);
+        setText("btn-enter-code", t.enterCode);
+        setText("btn-vip-demo", t.vipDemo);
+        setText("btn-open-cred-modal", t.reqCred);
+        setText("btn-lock-portal", t.lockBtn);
+
+        const profText = t["prof" + currentProfileIdx] || t.prof1;
+        setText("active-profile-badge", t.profilePrefix + profText);
+
+        setText("tab-vision", t.tabVision);
+        setText("tab-memberships", t.tabMemberships);
+        setText("tab-simulator", t.tabSimulator);
+        setText("tab-legal", t.tabLegal);
+        setText("tab-desk", t.tabDesk);
+
+        setText("hero-eyebrow", t.heroEyebrow);
+        setText("hero-title", t.heroTitle);
+        setText("hero-subtitle", t.heroSubtitle);
+        setText("cta-to-memberships", t.ctaMem);
+        setText("cta-to-simulator", t.ctaSim);
+
+        setText("cap-beach-t", t.capBeachT);
+        setText("cap-beach-d", t.capBeachD);
+        setText("cap-well-t", t.capWellT);
+        setText("cap-well-d", t.capWellD);
+        setText("cap-fo-t", t.capFoT);
+        setText("cap-fo-d", t.capFoD);
+
+        setText("pillars-heading", t.pillarsHeading);
+        setText("pillars-sub", t.pillarsSub);
+        setText("p1-num", t.p1Num);
+        setText("p1-title", t.p1Title);
+        setHTML("p1-list", t.p1List);
+        setText("p2-num", t.p2Num);
+        setText("p2-title", t.p2Title);
+        setHTML("p2-list", t.p2List);
+        setText("p3-num", t.p3Num);
+        setText("p3-title", t.p3Title);
+        setHTML("p3-list", t.p3List);
+        setText("p4-num", t.p4Num);
+        setText("p4-title", t.p4Title);
+        setHTML("p4-list", t.p4List);
+
+        setText("mp-heading", t.mpHeading);
+        setText("mp-sub", t.mpSub);
+        setText("svg-lbl-legacy", t.svgLegacy);
+        setText("svg-lbl-air", t.svgAir);
+        setText("svg-lbl-marinas", t.svgMarinas);
+        setText("svg-lbl-wellness", t.svgWellness);
+        setText("svg-lbl-agro", t.svgAgro);
+        setText("chip-legacy", t.chipLegacy);
+        setText("chip-air", t.chipAir);
+        setText("chip-marinas", t.chipMarinas);
+        setText("chip-wellness", t.chipWellness);
+        setText("chip-agro", t.chipAgro);
+        renderZone(activeZone);
+
+        setText("mem-heading", t.memHeading);
+        setText("mem-sub", t.memSub);
+        setText("th-attr", t.thAttr);
+        setText("th-leg", t.thLeg);
+        setText("th-exe", t.thExe);
+        setHTML("comp-table-body", t.compBody);
+
+        setText("leg-tier-lbl", t.legTierLbl);
+        setText("leg-card-title", t.legCardTitle);
+        setText("leg-card-price", t.legCardPrice);
+        setHTML("leg-card-list", t.legCardList);
+        setText("btn-sim-leg", t.btnSimLeg);
+        setText("btn-leg-legal", t.btnLegLegal);
+
+        setText("exe-tier-lbl", t.exeTierLbl);
+        setText("exe-card-title", t.exeCardTitle);
+        setText("exe-card-price", t.exeCardPrice);
+        setHTML("exe-card-list", t.exeCardList);
+        setText("btn-sim-exe", t.btnSimExe);
+        setText("btn-exe-desk", t.btnExeDesk);
+
+        setText("sim-heading", t.simHeading);
+        setText("sim-sub", t.simSub);
+        setText("sim-mode-legacy", t.simModeLegacy);
+        setText("sim-mode-executive", t.simModeExecutive);
+        setText("lbl-leg-years", t.lblLegYears);
+        setText("lbl-leg-uplift", t.lblLegUplift);
+        setText("lbl-leg-scope", t.lblLegScope);
+        setText("opt-leg-1", t.optLeg1);
+        setText("opt-leg-50", t.optLeg50);
+        setText("leg-sim-note", t.legSimNote);
+        setText("kpi-t-leg-base", t.kpiTLegBase);
+        setText("kpi-t-leg-post", t.kpiTLegPost);
+        setText("kpi-t-leg-yield", t.kpiTLegYield);
+        setText("kpi-t-leg-maint", t.kpiTLegMaint);
+
+        setText("lbl-exe-month", t.lblExeMonth);
+        setText("lbl-exe-count", t.lblExeCount);
+        setText("exe-sim-note", t.exeSimNote);
+        setText("kpi-t-exe-nom", t.kpiTExeNom);
+        setText("kpi-t-exe-buy", t.kpiTExeBuy);
+        setText("kpi-t-exe-maint", t.kpiTExeMaint);
+        setText("kpi-t-exe-tranche", t.kpiTExeTranche);
+
+        setText("legal-heading", t.legalHeading);
+        setText("legal-sub", t.legalSub);
+        setText("leg-c1-t", t.legC1T);
+        setHTML("leg-c1-list", t.legC1List);
+        setText("leg-c2-t", t.legC2T);
+        setHTML("leg-c2-list", t.legC2List);
+        setText("leg-c3-t", t.legC3T);
+        setHTML("leg-c3-list", t.legC3List);
+        setText("leg-c4-t", t.legC4T);
+        setHTML("leg-c4-p", t.legC4P);
+
+        setText("desk-heading", t.deskHeading);
+        setText("desk-sub", t.deskSub);
+        setText("lbl-desk-name", t.lblDeskName);
+        setText("lbl-desk-email", t.lblDeskEmail);
+        setText("lbl-desk-program", t.lblDeskProgram);
+        setText("opt-desk-1", t.optDesk1);
+        setText("opt-desk-2", t.optDesk2);
+        setText("opt-desk-3", t.optDesk3);
+        setText("lbl-desk-family", t.lblDeskFamily);
+        setText("lbl-desk-notes", t.lblDeskNotes);
+        setText("btn-desk-submit", t.btnDeskSubmit);
+
+        const deskName = document.getElementById("desk-name");
+        const deskEmail = document.getElementById("desk-email");
+        const deskFam = document.getElementById("desk-family");
+        const deskNotes = document.getElementById("desk-notes");
+        if (deskName) deskName.placeholder = t.phDeskName;
+        if (deskEmail) deskEmail.placeholder = t.phDeskEmail;
+        if (deskFam) deskFam.placeholder = t.phDeskFamily;
+        if (deskNotes) deskNotes.placeholder = t.phDeskNotes;
+
+        setText("footer-loc", t.footerLoc);
+        setText("footer-legal", t.footerLegal);
+        setText("cred-modal-title", t.credModalTitle);
+        setText("cred-modal-desc", t.credModalDesc);
+        setText("lbl-cred-contact", t.lblCredContact);
+        setText("btn-close-cred-modal", t.btnCloseCred);
+        setText("btn-gen-cred", t.btnGenCred);
+
+        const codeInput = document.getElementById("invite-code-input");
+        if (codeInput) codeInput.placeholder = t.codePlaceholder;
+
+        updateLegacySim();
+        updateExecutiveSim();
+      }
+
+      function unlockPortal() {
+        document.getElementById("gatekeeper-screen").classList.add("hidden");
+        document.getElementById("main-app").classList.remove("hidden");
+        switchTab("vision");
+        updateLegacySim();
+        updateExecutiveSim();
+      }
+
+      function lockPortal() {
+        document.getElementById("main-app").classList.add("hidden");
+        document.getElementById("gatekeeper-screen").classList.remove("hidden");
+        document.getElementById("gate-feedback").textContent = "";
+      }
+
+      function switchTab(tabName) {
+        const tabs = ["vision", "memberships", "simulator", "legal", "desk"];
+        tabs.forEach((name) => {
+          const sec = document.getElementById("view-" + name);
+          const btn = document.querySelector('.nav-tab[data-tab="' + name + '"]');
+          if (sec) sec.classList.toggle("hidden", name !== tabName);
+          if (btn) btn.classList.toggle("active", name === tabName);
+        });
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function setSimMode(mode) {
+        const isLeg = mode === "legacy";
+        document.getElementById("sim-legacy-panel").classList.toggle("hidden", !isLeg);
+        document.getElementById("sim-executive-panel").classList.toggle("hidden", isLeg);
+        document.getElementById("sim-mode-legacy").className = isLeg ? "btn-primary" : "btn-secondary";
+        document.getElementById("sim-mode-executive").className = !isLeg ? "btn-primary" : "btn-secondary";
+      }
+
+      function updateLegacySim() {
+        const t = I18N[currentLang] || I18N.es;
+        const years = parseInt(document.getElementById("leg-years").value, 10) || 5;
+        const upliftPct = parseInt(document.getElementById("leg-uplift").value, 10) || 30;
+        const units = parseInt(document.getElementById("leg-scope").value, 10) || 1;
+
+        const basePrice = 25000000 * units;
+        const postDeliveryPrice = basePrice * (1 + upliftPct / 100);
+        const annualYield = basePrice * 0.045;
+        const cumYield = annualYield * years;
+        const cumMaint = 150000 * units * years;
+
+        document.getElementById("leg-years-val").textContent = years + " " + (years === 1 ? t.yearSingular : t.yearPlural);
+        document.getElementById("leg-uplift-val").textContent = upliftPct + "%";
+        document.getElementById("leg-scope-label").textContent = units === 50 ? t.villaPlural : t.villaSingular;
+
+        document.getElementById("kpi-leg-base").textContent = formatUSD(basePrice);
+        document.getElementById("kpi-leg-post").textContent = formatUSD(postDeliveryPrice);
+        document.getElementById("kpi-leg-yield").textContent = formatUSD(cumYield);
+        document.getElementById("kpi-leg-maint").textContent = formatUSD(cumMaint);
+
+        if (currentLang === "en") {
+          document.getElementById("leg-summary-line").textContent =
+            years + "-year scenario (" + (units === 50 ? "50 villas" : "1 villa") + "): estimated post-Denniston value (+" +
+            upliftPct + "%) of " + formatUSD(postDeliveryPrice) + ", cumulative 4.5% annual return of " +
+            formatUSD(cumYield) + ", and cumulative maintenance of " + formatUSD(cumMaint) + ".";
+        } else if (currentLang === "ru") {
+          document.getElementById("leg-summary-line").textContent =
+            "Сценарий на " + years + " лет (" + (units === 50 ? "50 вилл" : "1 вилла") + "): оценка после сдачи Denniston (+" +
+            upliftPct + "%) — " + formatUSD(postDeliveryPrice) + ", накопленный доход 4,5% годовых — " +
+            formatUSD(cumYield) + ", накопленное обслуживание — " + formatUSD(cumMaint) + ".";
+        } else {
+          document.getElementById("leg-summary-line").textContent =
+            "Escenario a " + years + " años (" + (units === 50 ? "50 villas" : "1 villa") + "): valor estimado post-entrega Denniston (+" +
+            upliftPct + "%) de " + formatUSD(postDeliveryPrice) + ", retorno acumulado 4,5% anual de " +
+            formatUSD(cumYield) + " y mantenimiento acumulado de " + formatUSD(cumMaint) + ".";
+        }
+
+        const svg = document.getElementById("svg-legacy");
+        const maxVal = Math.max(postDeliveryPrice + cumYield, basePrice * 1.4, 1);
+        const bars = [
+          { label: t.barPlans, val: basePrice, col: "#122620" },
+          { label: "Denniston +" + upliftPct + "%", val: postDeliveryPrice, col: "#1c4438" },
+          { label: t.barYield, val: cumYield, col: "#9a7b4f" },
+          { label: t.barMaint, val: cumMaint, col: "#7a8580" }
+        ];
+
+        let inner = '<line x1="40" y1="185" x2="495" y2="185" stroke="#9aa5a0" stroke-width="1" />';
+        bars.forEach((b, idx) => {
+          const h = Math.max(8, Math.round((b.val / maxVal) * 140));
+          const x = 68 + idx * 112;
+          const y = 185 - h;
+          inner += '<rect x="' + x + '" y="' + y + '" width="56" height="' + h + '" rx="6" fill="' + b.col + '" />';
+          inner += '<text x="' + (x + 28) + '" y="205" text-anchor="middle" fill="#3b4d47" font-size="11">' + b.label + '</text>';
+        });
+        svg.innerHTML = inner;
+      }
+
+      function updateExecutiveSim() {
+        const t = I18N[currentLang] || I18N.es;
+        const month = parseInt(document.getElementById("exe-month").value, 10) || 36;
+        const count = parseInt(document.getElementById("exe-count").value, 10) || 1;
+
+        const nominal = 250000 * count;
+        const buybackUnit = month <= 60 ? 150000 : 250000;
+        const buybackTotal = buybackUnit * count;
+        const proratedMaint = (50000 / 12) * month * count;
+        const trancheText = month <= 60 ? t.tranche1 : t.tranche2;
+
+        document.getElementById("exe-month-val").textContent = t.monthLabel + " " + month + " (" + (month / 12).toFixed(1) + " " + t.yearPlural + ")";
+        document.getElementById("exe-count-val").textContent = count + " " + (count === 1 ? t.memSingular : t.memPlural);
+
+        document.getElementById("kpi-exe-nominal").textContent = formatUSD(nominal);
+        document.getElementById("kpi-exe-buyback").textContent = formatUSD(buybackTotal);
+        document.getElementById("kpi-exe-maint").textContent = formatUSD(proratedMaint);
+        document.getElementById("kpi-exe-tranche").textContent = trancheText;
+
+        if (currentLang === "en") {
+          document.getElementById("exe-summary-line").textContent =
+            "At month " + month + " (" + count + (count === 1 ? " membership" : " memberships") +
+            "), the applicable buyback value is " + formatUSD(buybackTotal) +
+            " (no secondary market; strict access control active).";
+        } else if (currentLang === "ru") {
+          document.getElementById("exe-summary-line").textContent =
+            "На " + month + "-й месяц (" + count + " чл.) применимая сумма обратного выкупа составляет " +
+            formatUSD(buybackTotal) + " (вторичный рынок запрещён; действует контроль доступа).";
+        } else {
+          document.getElementById("exe-summary-line").textContent =
+            "En el mes " + month + " (" + count + (count === 1 ? " membresía" : " membresías") +
+            "), el valor de recompra aplicable es de " + formatUSD(buybackTotal) +
+            " (sin mercado secundario; control de acceso activo).";
+        }
+
+        const svg = document.getElementById("svg-executive");
+        const pts = [];
+        for (let m = 1; m <= 120; m += 5) {
+          const val = (m <= 60 ? 150000 : 250000) * count;
+          const x = 45 + ((m - 1) / 119) * 440;
+          const y = 180 - ((val / (250000 * count)) * 135);
+          pts.push(x.toFixed(1) + "," + y.toFixed(1));
+        }
+
+        const curX = 45 + ((month - 1) / 119) * 440;
+        const curY = 180 - ((buybackTotal / (250000 * count)) * 135);
+
+        svg.innerHTML =
+          '<line x1="45" y1="180" x2="485" y2="180" stroke="#9aa5a0" stroke-width="1" />' +
+          '<polyline fill="none" stroke="#1c4438" stroke-width="3" points="' + pts.join(" ") + '" />' +
+          '<circle cx="' + curX.toFixed(1) + '" cy="' + curY.toFixed(1) + '" r="6" fill="#9a7b4f" />' +
+          '<text x="45" y="203" fill="#3b4d47" font-size="11">' + t.axisM1 + '</text>' +
+          '<text x="265" y="203" text-anchor="middle" fill="#3b4d47" font-size="11">' + t.axisM60 + '</text>' +
+          '<text x="485" y="203" text-anchor="end" fill="#3b4d47" font-size="11">' + t.axisM120 + '</text>';
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".lang-btn").forEach((btn) => {
+          btn.addEventListener("click", function () {
+            applyLanguage(this.getAttribute("data-lang"));
+          });
+        });
+
+        document.querySelectorAll(".profile-pill").forEach((pill) => {
+          pill.addEventListener("click", function () {
+            document.querySelectorAll(".profile-pill").forEach((p) => p.classList.remove("active"));
+            this.classList.add("active");
+            currentProfileIdx = this.getAttribute("data-profile-idx") || "1";
+            applyLanguage(currentLang);
+          });
+        });
+
+        document.getElementById("gate-form").addEventListener("submit", function (e) {
+          e.preventDefault();
+          const raw = (document.getElementById("invite-code-input").value || "").trim().toUpperCase();
+          if (raw.length >= 4) {
+            unlockPortal();
+          } else {
+            document.getElementById("gate-feedback").textContent = I18N[currentLang].invalidCode;
+          }
+        });
+
+        document.getElementById("btn-vip-demo").addEventListener("click", unlockPortal);
+        document.getElementById("btn-lock-portal").addEventListener("click", lockPortal);
+
+        document.querySelectorAll(".nav-tab").forEach((btn) => {
+          btn.addEventListener("click", function () {
+            switchTab(this.getAttribute("data-tab"));
+          });
+        });
+
+        document.getElementById("cta-to-memberships").addEventListener("click", () => switchTab("memberships"));
+        document.getElementById("cta-to-simulator").addEventListener("click", () => switchTab("simulator"));
+
+        document.querySelectorAll("[data-jump-tab]").forEach((btn) => {
+          btn.addEventListener("click", function () {
+            switchTab(this.getAttribute("data-jump-tab"));
+          });
+        });
+
+        document.querySelectorAll("[data-jump-sim]").forEach((btn) => {
+          btn.addEventListener("click", function () {
+            const mode = this.getAttribute("data-jump-sim");
+            switchTab("simulator");
+            setSimMode(mode);
+          });
+        });
+
+        document.querySelectorAll(".zone-btn, .zone-chip").forEach((el) => {
+          el.addEventListener("click", function () {
+            const zKey = this.getAttribute("data-zone");
+            renderZone(zKey);
+          });
+        });
+
+        document.getElementById("sim-mode-legacy").addEventListener("click", () => setSimMode("legacy"));
+        document.getElementById("sim-mode-executive").addEventListener("click", () => setSimMode("executive"));
+
+        ["leg-years", "leg-uplift", "leg-scope"].forEach((id) => {
+          document.getElementById(id).addEventListener("input", updateLegacySim);
+          document.getElementById(id).addEventListener("change", updateLegacySim);
+        });
+
+        ["exe-month", "exe-count"].forEach((id) => {
+          document.getElementById(id).addEventListener("input", updateExecutiveSim);
+          document.getElementById(id).addEventListener("change", updateExecutiveSim);
+        });
+
+        document.getElementById("desk-form").addEventListener("submit", function (e) {
+          e.preventDefault();
+          const name = document.getElementById("desk-name").value.trim();
+          const email = document.getElementById("desk-email").value.trim();
+          const sel = document.getElementById("desk-program");
+          const prog = sel.options[sel.selectedIndex].text;
+          const fam = document.getElementById("desk-family").value.trim();
+          const ref = "PRC-" + Math.floor(100000 + Math.random() * 900000);
+
+          const box = document.getElementById("desk-receipt");
+          box.classList.remove("hidden");
+          if (currentLang === "en") {
+            box.innerHTML =
+              "<strong>Inquiry registered at Private Desk · Reference: " + ref + "</strong><br/>" +
+              "Applicant: " + name + " (" + email + ")<br/>" +
+              "Program: " + prog + "<br/>" +
+              (fam ? "Household / Notes: " + fam : "");
+          } else if (currentLang === "ru") {
+            box.innerHTML =
+              "<strong>Заявка зарегистрирована в Private Desk · Номер: " + ref + "</strong><br/>" +
+              "Заявитель: " + name + " (" + email + ")<br/>" +
+              "Программа: " + prog + "<br/>" +
+              (fam ? "Состав семьи / Примечания: " + fam : "");
+          } else {
+            box.innerHTML =
+              "<strong>Solicitud registrada en Private Desk · Referencia: " + ref + "</strong><br/>" +
+              "Solicitante: " + name + " (" + email + ")<br/>" +
+              "Programa: " + prog + "<br/>" +
+              (fam ? "Núcleo / Notas: " + fam : "");
+          }
+        });
+
+        const modal = document.getElementById("cred-modal");
+        document.getElementById("btn-open-cred-modal").addEventListener("click", () => {
+          document.getElementById("cred-result").textContent = "";
+          modal.classList.remove("hidden");
+        });
+        document.getElementById("btn-close-cred-modal").addEventListener("click", () => {
+          modal.classList.add("hidden");
+        });
+        document.getElementById("btn-gen-cred").addEventListener("click", () => {
+          const code = "PORCADA-" + Math.floor(1000 + Math.random() * 9000);
+          document.getElementById("invite-code-input").value = code;
+          document.getElementById("cred-result").textContent =
+            currentLang === "en"
+              ? "Temporary key generated: " + code + " (loaded into access field)"
+              : currentLang === "ru"
+              ? "Временный код создан: " + code + " (подставлен в поле входа)"
+              : "Clave temporal generada: " + code + " (ya cargada en el acceso)";
+        });
+
+        applyLanguage("es");
+      });
+    })();
+  </script>
+</body>
+</html>
