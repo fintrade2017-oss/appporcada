@@ -34,6 +34,72 @@
         @media (max-width: 600px) { .features { grid-template-columns: 1fr; } }
     </style>
 </head>
+    <script>
+(function () {
+    // 1. Leer la "llave" de la URL (la que genera admin.html)
+    var params = new URLSearchParams(window.location.search);
+    var token  = params.get('token');
+    var ref    = params.get('ref');
+
+    // 2. Validación: la llave es válida si existe y tiene formato vip-xxxxxx
+    var llaveValida = !!(token && token.length > 5 && token.indexOf('vip-') === 0);
+
+    // 3. Localizar el modal de acceso SIN depender de IDs exactos
+    //    (lo buscamos por el botón "Generar Clave Invitado" o el título "Solicitar Credencial de Acceso")
+    function encontrarModal() {
+        var nodos = Array.prototype.slice.call(document.querySelectorAll('button, a, span, div, h2, h3, p'));
+        var btn = nodos.find(function (e) {
+            return e.textContent.trim().toLowerCase().indexOf('generar clave invitado') !== -1;
+        });
+        if (btn) {
+            var el = btn;
+            for (var i = 0; i < 7 && el; i++) {
+                var cs = window.getComputedStyle(el);
+                var esOverlay =
+                    (el.id && /modal|gate|login|access|overlay|credencial/i.test(el.id)) ||
+                    (el.className && /modal|overlay|gate|login|access/i.test(el.className)) ||
+                    cs.position === 'fixed';
+                if (esOverlay) return el;
+                el = el.parentElement;
+            }
+            return btn.closest('div');
+        }
+        var titulo = nodos.find(function (e) {
+            return e.textContent.trim().toLowerCase().indexOf('solicitar credencial de acceso') !== -1;
+        });
+        return titulo ? titulo.closest('div') : null;
+    }
+
+    // 4. Si la llave es válida → levantar el cerrojo
+    if (llaveValida) {
+        var modal = encontrarModal();
+        if (modal) {
+            modal.style.display = 'none';
+            modal.setAttribute('hidden', '');
+        }
+
+        // Quitar cualquier bloqueo de scroll del body (clases tipo "locked", "no-scroll")
+        document.body.classList.remove('locked', 'is-locked', 'no-scroll', 'overflow-hidden');
+        document.documentElement.style.overflow = '';
+        document.body.style.overflow = '';
+
+        // 5. Saludo discreto personalizado con el nombre del titular
+        if (ref) {
+            var nombre = decodeURIComponent(ref);
+            var saludo = Array.prototype.slice.call(document.querySelectorAll('h1,h2,h3,p,span,div'))
+                .find(function (e) {
+                    var t = e.textContent.trim().toLowerCase();
+                    return t === 'bienvenido/a' || t.indexOf('bienvenido/a') === 0;
+                });
+            if (saludo) saludo.textContent = 'Bienvenido, ' + nombre;
+        }
+
+        // 6. Limpiar la URL para que el token no quede a la vista (pulcritud)
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
+    // Si NO hay llave válida → el modal de acceso manual se queda tal cual (comportamiento correcto)
+})();
+</script>
 <body>
 
 <div class="container">
