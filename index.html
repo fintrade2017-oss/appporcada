@@ -1,60 +1,90 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <!-- GUARDIÁN DE ACCESO VIP (Solución de Excelencia) -->
+ <!-- ===== GATE VIP · DEFAULT DENY (banca privada) ===== -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  /* 1. DENEGAR POR DEFECTO: el proyecto NO se pinta hasta tener llave */
+  body { opacity: 0 !important; visibility: hidden !important; }
+  html.vip-unlocked body { opacity: 1 !important; visibility: visible !important;
+                           transition: opacity .6s ease; }
+
+  /* 2. EL GATE: solo visible si NO estamos desbloqueados */
+  #vip-gate { display: none; }
+  html:not(.vip-unlocked) #vip-gate {
+    display: flex; position: fixed; inset: 0; z-index: 999999;
+    background: #06080b; /* negro sólido: nada asoma detrás */
+    color: #EAEAEA; font-family: 'Jost', 'Helvetica Neue', Arial, sans-serif;
+    flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 24px;
+  }
+  #vip-gate .mono {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 300; letter-spacing: .55em; text-indent: .55em;
+    font-size: clamp(2rem, 6vw, 3.4rem); color: #C5A059; margin: 0;
+  }
+  #vip-gate .rule {
+    width: 64px; height: 1px; background: linear-gradient(90deg, transparent, #C5A059, transparent);
+    margin: 28px 0;
+  }
+  #vip-gate .sub {
+    font-size: .72rem; letter-spacing: .32em; text-transform: uppercase;
+    color: #8B92A1; margin: 0 0 8px;
+  }
+  #vip-gate .note {
+    font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic;
+    font-size: 1.05rem; color: #b9bec9; max-width: 30ch; line-height: 1.5; margin-top: 6px;
+  }
+  #vip-gate .loc {
+    position: absolute; bottom: 28px; left: 0; right: 0;
+    font-size: .62rem; letter-spacing: .3em; text-transform: uppercase; color: #4a5060;
+  }
+
+  /* 3. BANDA DE BIENVENIDA (solo con llave) */
+  #vip-welcome {
+    display: none; position: fixed; top: 0; left: 0; right: 0; z-index: 999998;
+    background: rgba(197,160,89,.12); backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(197,160,89,.5); color: #C5A059;
+    text-align: center; padding: 11px 16px;
+    font-family: 'Jost', sans-serif; font-size: .74rem;
+    letter-spacing: .22em; text-transform: uppercase;
+  }
+  html.vip-unlocked #vip-welcome { display: block; }
+  html.vip-unlocked body { padding-top: 44px; }
+</style>
+
+<!-- El gate vive en el DOM pero solo se pinta si NO hay llave (ver CSS de arriba) -->
+<div id="vip-gate">
+  <p class="mono">LA PORCADA</p>
+  <div class="rule"></div>
+  <p class="sub">Plataforma Privada · Acceso Restringido</p>
+  <p class="note">Este dossier es estrictamente confidencial.<br>Utilice el enlace nominativo remitido por su Director de Relaciones.</p>
+  <p class="loc">Chiriquí · República de Panamá</p>
+</div>
+
+<div id="vip-welcome"></div>
+
 <script>
-(function() {
-    // 1. Leer la URL inmediatamente, antes de que la página termine de cargar
-    const params = new URLSearchParams(window.location.search);
-    const token = params.get('token');
-    const ref = params.get('ref');
+(function () {
+  var params = new URLSearchParams(location.search);
+  var token  = params.get('token');
+  var ref    = params.get('ref');
+  var ok = token && token.indexOf('vip-') === 0 && token.length > 5;
 
-    // 2. Validar la llave (debe empezar con 'vip-' y tener longitud)
-    const esValido = token && token.startsWith('vip-') && token.length > 5;
-
-    // 3. SI NO ES VÁLIDO: Mostramos una pantalla completa elegante. 
-    // El proyecto real NUNCA se llega a ver ni a cargar visualmente.
-    if (!esValido) {
-        document.documentElement.innerHTML = `
-            <style>
-                body { margin: 0; padding: 0; background: #0a0c10; color: #EAEAEA; font-family: 'Helvetica Neue', Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; text-align: center; }
-                .gate { max-width: 500px; padding: 40px; }
-                .gate h1 { color: #C5A059; font-weight: 300; letter-spacing: 3px; text-transform: uppercase; font-size: 1.5rem; margin-bottom: 20px; }
-                .gate p { color: #8B92A1; line-height: 1.6; font-size: 0.95rem; }
-                .gate .icon { font-size: 2.5rem; margin-bottom: 20px; color: #C5A059; opacity: 0.8; }
-            </style>
-            <div class="gate">
-                <div class="icon">🔒</div>
-                <h1>Acceso Privado</h1>
-                <p>Este dossier es exclusivo y confidencial.<br>Por favor, utilice el enlace criptográfico personalizado proporcionado por su Director de Relaciones.</p>
-            </div>
-        `;
-        return; // DETIENE LA EJECUCIÓN. El resto de la web no se muestra.
+  if (ok) {
+    document.documentElement.classList.add('vip-unlocked');
+    if (ref) {
+      document.getElementById('vip-welcome').innerHTML =
+        'Bienvenido/a, <span style="color:#fff">' + decodeURIComponent(ref) + '</span> &nbsp;·&nbsp; Dossier Confidencial Activo';
     }
-
-    // 4. SI ES VÁLIDO: La web normal carga. Solo inyectamos un saludo discreto.
-    window.addEventListener('DOMContentLoaded', function() {
-        if (ref) {
-            const welcomeBanner = document.createElement('div');
-            welcomeBanner.innerHTML = `Bienvenido, <strong>${decodeURIComponent(ref)}</strong> · Dossier Confidencial Activo`;
-            welcomeBanner.style.cssText = `
-                position: fixed; top: 0; left: 0; right: 0; 
-                background: rgba(197, 160, 89, 0.15); 
-                border-bottom: 1px solid #C5A059; 
-                color: #C5A059; text-align: center; 
-                padding: 12px; font-size: 0.8rem; 
-                letter-spacing: 1.5px; text-transform: uppercase; 
-                z-index: 9999; font-family: 'Helvetica Neue', Arial, sans-serif;
-                backdrop-filter: blur(8px);
-            `;
-            document.body.insertBefore(welcomeBanner, document.body.firstChild);
-            document.body.style.paddingTop = '45px'; // Para que no tape el menú original
-        }
-        
-        // Limpiar la URL para que se vea profesional (quita el ?token=...)
-        window.history.replaceState({}, document.title, window.location.pathname);
-    });
+    history.replaceState({}, document.title, location.pathname);
+  }
 })();
+</script>
+<!-- ===== FIN GATE VIP ===== -->
 </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
