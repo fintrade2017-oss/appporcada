@@ -2813,5 +2813,57 @@
         }
       });
     })();
-  </script>
+  <script>
+document.addEventListener("DOMContentLoaded", function() {
+    // 1. Leer la URL en busca de la llave generada por el admin local
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+    const ref = urlParams.get('ref');
+
+    // 2. Validar que sea una llave legítima (formato: vip-xxxxxx)
+    if (token && token.startsWith('vip-') && token.length > 5) {
+        
+        // 3. Buscar el modal de acceso de forma inteligente (por su texto visible)
+        const allElements = document.querySelectorAll('div, section, dialog');
+        let modalEncontrado = null;
+        
+        for (let el of allElements) {
+            if (el.innerText && (el.innerText.includes('Solicitar Credencial de Acceso') || el.innerText.includes('Generar Clave Invitado'))) {
+                // Nos aseguramos de capturar el contenedor padre del modal, no solo el texto
+                if (el.children.length > 0 || el.classList.contains('modal') || el.classList.contains('overlay')) {
+                    modalEncontrado = el;
+                    break;
+                }
+            }
+        }
+
+        // 4. Si lo encuentra, lo oculta por completo
+        if (modalEncontrado) {
+            modalEncontrado.style.display = 'none';
+            modalEncontrado.style.visibility = 'hidden';
+            modalEncontrado.classList.add('hidden', 'is-hidden');
+        }
+
+        // 5. Desbloquear el scroll del cuerpo de la página (muy común en modales)
+        document.body.style.overflow = 'auto';
+        document.body.classList.remove('no-scroll', 'locked', 'is-locked');
+
+        // 6. ELIMINAR el recuadro verde o cualquier rastro de debug
+        const debugElements = document.querySelectorAll('.debug-info, #debugInfo, [class*="debug"], [class*="token-display"]');
+        debugElements.forEach(el => el.style.display = 'none');
+        
+        // Fuerza la ocultación de cualquier div con fondo verde inline
+        document.querySelectorAll('div').forEach(div => {
+            if (div.style.backgroundColor && (div.style.backgroundColor.includes('green') || div.style.backgroundColor.includes('#4CAF50') || div.style.backgroundColor.includes('lightgreen'))) {
+                div.style.display = 'none';
+            }
+        });
+
+        // 7. Limpiar la URL para que se vea profesional (quita el ?token=... de la barra)
+        window.history.replaceState({}, document.title, window.location.pathname);
+        
+        console.log("✅ Acceso VIP autorizado. Presentación desbloqueada.");
+    }
+});
+</script>
 </html>
